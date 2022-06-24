@@ -37,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Custom Apps
+    'authentification',
+    'nominations',
+    'organizer',
+    'participant',
+    'votes',
+    'competition',
+    'winners',
+
 ]
 
 MIDDLEWARE = [
@@ -80,6 +90,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'authentification.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
