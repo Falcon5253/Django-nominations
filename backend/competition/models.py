@@ -13,5 +13,5 @@ class Competition(models.Model):
         return str(self.nomination_id)
 
     class Meta:
-        verbose_name = 'Номинация'
-        verbose_name_plural = 'Номинации'
+        verbose_name = 'Соревнование'
+        verbose_name_plural = 'Соревнования'
