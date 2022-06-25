@@ -1,3 +1,4 @@
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse
 
-# Create your views here.
+def nominations_list(request):
+    return JsonResponse(data={'status':'ok'})
