@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from competition.serializers import CompetitionSerializer
+from competition.models import Competition
 
-# Create your views here.
+class CompetitionViewSet(ModelViewSet):
+    queryset = Competition.objects.all()
+    serializer_class = CompetitionSerializer

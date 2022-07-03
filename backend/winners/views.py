@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from winners.serializers import WinnerSerialzer
+from winners.models import Winners
 
-# Create your views here.
+class WinnerViewSet(ModelViewSet):
+    queryset = Winners.objects.all()
+    serializer_class = WinnerSerialzer

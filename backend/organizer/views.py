@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from organizer.serializers import OrganizerSerializer
+from organizer.models import Organizer
 
-# Create your views here.
+class OrganizerViewSet(ModelViewSet):
+    queryset = Organizer.objects.all()
+    serializer_class = OrganizerSerializer

@@ -16,8 +16,9 @@ Including another URLconf
 from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
+from core.routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('nominations.urls'))
+    path('api/', include(router.urls))
 ]

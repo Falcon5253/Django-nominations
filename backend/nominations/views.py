@@ -1,12 +1,7 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from django.core import serializers
-from nominations.models import Nomination
+from rest_framework.viewsets import ModelViewSet
 from nominations.serializers import NominationSerializer
+from nominations.models import Nomination
 
-
-@api_view()
-def nominations_list(request):
-    nominations = Nomination.objects.all()
-    data = NominationSerializer(instance=nominations, many=True).data
-    return Response(data={'data':data})
+class NominationViewSet(ModelViewSet):
+    queryset = Nomination.objects.all()
+    serializer_class = NominationSerializer
