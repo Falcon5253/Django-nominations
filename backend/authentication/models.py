@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
-from authentification.managers import UserManager
+from authentication.managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='Электронная почта', max_length=255, unique=True)

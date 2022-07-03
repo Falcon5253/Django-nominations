@@ -1,7 +1,7 @@
 from rest_framework.exceptions import ValidationError, NotFound, AuthenticationFailed
 from rest_framework.viewsets import ModelViewSet
-from authentification.models import User
-from authentification.serializers import UserSerializer
+from authentication.models import User
+from authentication.serializers import UserSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken

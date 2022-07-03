@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     #Custom Apps
-    'authentification',
+    'authentication',
     'nominations',
     'organizer',
     'participant',
@@ -119,7 +119,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'authentification.User'
+AUTH_USER_MODEL = 'authentication.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

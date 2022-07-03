@@ -5,7 +5,7 @@ from competition.views import CompetitionViewSet
 from participant.views import ParticipantViewSet
 from votes.views import VotesViewSet
 from winners.views import WinnerViewSet
-from authentification.views import UserViewSet
+from authentication.views import UserViewSet
 
 router = DefaultRouter()
 

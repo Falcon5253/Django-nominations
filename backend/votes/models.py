@@ -1,6 +1,6 @@
 from django.db import models
 from competition.models import Competition
-from authentification.models import User
+from authentication.models import User
 from participant.models import Participant
 
 class Votes(models.Model):

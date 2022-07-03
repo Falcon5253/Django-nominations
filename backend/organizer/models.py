@@ -1,6 +1,6 @@
 from tabnanny import verbose
 from django.db import models
-from authentification.models import User
+from authentication.models import User
 
 class Organizer(models.Model):
     user_id = models.OneToOneField(verbose_name='Пользователь', to=User, related_name='organizer', on_delete=models.CASCADE)
