@@ -6,6 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import authenticate, login as auth_login
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
@@ -36,6 +37,9 @@ class UserViewSet(ModelViewSet):
         refresh = RefreshToken.for_user(user)
         response = Response()
         response.data = {'access': str(refresh.access_token)}
+        user = authenticate(username=request.data['email'], password=request.data['password'])
+        auth_login(request, user)
+
         return response
 
     @action(methods=['GET'], detail=False, url_path='me', permission_classes=[IsAuthenticated])
@@ -43,6 +47,5 @@ class UserViewSet(ModelViewSet):
         
         
         user = request.user
-        print(user)
-        # data = self.serializer_class(user).data
-        return Response({'1':'1'})
+        data = self.serializer_class(user).data
+        return Response(data)

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     #3d party
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
 
     #Custom Apps
     'authentication',
