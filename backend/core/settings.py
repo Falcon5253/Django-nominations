@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     #3d party
     'rest_framework',
+    'rest_framework_simplejwt',
 
     #Custom Apps
     'authentification',
@@ -61,10 +62,12 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEKWORK = {
-    'DEFAULT_AUTHENTIFICATION_CLASSES': {
-        'rest_framework_simplejwt.authentification.JWTAuthentification',
-
-    }
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 SIMPLE_JWT = {
@@ -99,7 +102,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+# WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
