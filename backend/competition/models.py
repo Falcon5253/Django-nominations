@@ -8,6 +8,7 @@ class Competition(models.Model):
     nomination_id = models.ForeignKey(to=Nomination, verbose_name='nomination', related_name='competition', on_delete=models.CASCADE)
     year = models.DateField(verbose_name='Дата')
     organizer_id = models.OneToOneField(to=Organizer, verbose_name='organizer', related_name='competition', on_delete=models.CASCADE)
+    cover = models.ImageField(verbose_name='Обложка', upload_to='competition/cover')
 
     def __str__(self):
         return str(self.nomination_id)
