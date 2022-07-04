@@ -353,7 +353,7 @@ template {
   align-items: center;
 }
 .header__logo {
-  width: 288px;
+  width: 244px;
   grid-area: logo;
   margin-right: 10px;
 }
@@ -417,7 +417,7 @@ template {
 .cards {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 576px);
+  grid-template-columns: repeat(5, 345.6px);
 }
 .cards__title {
   grid-column: 1/-1;
@@ -429,9 +429,9 @@ template {
 }
 
 .card {
-  margin-bottom: 96px;
-  max-width: 576px;
-  height: 672px;
+  margin-bottom: 64px;
+  max-width: 384px;
+  height: 448px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -439,20 +439,23 @@ template {
   gap: 0;
 }
 .card__img {
-  width: 384px;
+  width: 256px;
   border: solid 2px #000000;
-  height: 480px;
+  height: 320px;
+}
+.card__img:hover {
+  cursor: pointer;
 }
 .card__textfield {
-  height: 96px;
-  width: 384px;
+  height: 64px;
+  width: 256px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .card__nickname {
   display: block;
-  font-size: 28px;
+  font-size: 20px;
   text-align: center;
   font-weight: 500;
   margin: 0;
@@ -461,13 +464,13 @@ template {
 .card__nomination {
   margin: 0;
   display: block;
-  font-size: 28px;
+  font-size: 20px;
   text-align: center;
   color: #3624FF;
   font-weight: 500;
 }
 .card__nomination-description {
-  font-size: 20px;
+  font-size: 16px;
   color: #000000;
   text-align: center;
   margin: 0;
@@ -476,35 +479,87 @@ template {
 }
 
 .contacts {
-  height: 384px;
+  height: 256px;
 }
 .contacts__title {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 300;
   color: #000000;
   margin-top: 0;
 }
 .contacts__phone {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 300;
   color: #000000;
 }
 .contacts__mail {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 300;
   color: #000000;
+}
+
+.form {
+  margin-top: 30px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+}
+.form__labels {
+  left: calc(50% - 200px - 147.2px);
+  gap: 10px;
+  top: 10px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+.form__label {
+  display: block;
+  height: 60px;
+  margin: 0;
+  font-size: 28px;
+  text-align: right;
+}
+.form__input {
+  display: block;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  font-size: 28px;
+}
+.form__input--textarea {
+  height: 180px;
+  resize: none;
+}
+.form__input[type=submit]:hover {
+  cursor: pointer;
+}
+.form__input--file {
+  padding-top: 15px;
+  font-size: 20px;
+  height: 50px;
+}
+.form__input--reg-button {
+  padding-top: 10px;
+  height: 40px;
+  font-size: 28px;
 }
 
 html {
   font-family: "Roboto", sans-serif;
   font-style: normal;
   position: relative;
+  min-height: 100%;
 }
 
 body {
-  width: calc(100% - 192px);
+  width: calc(100% - 256px);
   margin: 0 auto 0 auto;
-  margin-bottom: 672px;
+  margin-bottom: 448px;
 }
 
 .visually-hidden {
@@ -516,7 +571,7 @@ body {
   bottom: 0;
   width: 100%;
   left: 0;
-  height: 480px;
+  height: 320px;
   text-align: center;
 }
 
@@ -525,13 +580,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 96px;
+  height: 64px;
   width: 100%;
 }
 .made-by__text {
   margin: 0;
   font-weight: 300;
-  font-size: 24px;
+  font-size: 16px;
   color: #FFFFFF;
 }
 

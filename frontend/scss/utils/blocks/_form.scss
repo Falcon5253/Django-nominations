@@ -1,0 +1,50 @@
+.form {
+    margin-top: 30px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    &__labels {
+        left: calc( 50% - 200px - $w*2.3 );
+        gap: 10px;
+        top: 10px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+    }
+    &__label {
+        display: block;
+        height: 60px;
+        margin: 0;
+        font-size: 28px;
+        text-align: right;
+    }
+    &__input {
+        display: block;
+        height: 56px;
+        margin: 0;
+        padding: 0;
+        width: 400px;
+        font-size: 28px;
+    }
+    &__input--textarea {
+        height: 180px;
+        resize: none;
+    }
+    &__input[type='submit']:hover{
+        cursor: pointer;
+    }
+    &__input--file {
+        padding-top: 15px;
+        font-size: 20px;
+        height: 50px;
+    }
+    &__input--reg-button {
+        padding-top: 10px;
+        height: 40px;
+        font-size: 28px;
+    }
+}

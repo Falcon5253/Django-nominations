@@ -12,6 +12,9 @@
         border: solid 2px $black;
         height: $w*5;
     }
+    &__img:hover {
+        cursor: pointer;
+    }
     &__textfield {
         height: $w;
         width: $w*4;
@@ -21,7 +24,7 @@
     }
     &__nickname {
         display: block;
-        font-size: 28px;
+        font-size: $card-text;
         text-align: center;
         font-weight: 500;
         margin: 0;
@@ -30,13 +33,13 @@
     &__nomination {
         margin: 0;
         display: block;
-        font-size: 28px;
+        font-size: $card-text;
         text-align: center;
         color: $dblue;
         font-weight: 500;
     }
     &__nomination-description {
-        font-size: 20px;
+        font-size: $card-text-description;
         color: $black;
         text-align: center;
         margin: 0;

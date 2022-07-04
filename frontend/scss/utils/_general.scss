@@ -4,16 +4,18 @@
 @import "blocks/cards";
 @import "blocks/card";
 @import "blocks/contacts";
+@import "blocks/form";
 
 
 html {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   position: relative;
+  min-height: 100%;
 }
 
 body {
-  width: calc(100% - ($w * 2));
+  width: calc(100% - ($w * 4));
   margin: 0 auto 0 auto;
   margin-bottom: $w*7;
 }
@@ -41,7 +43,7 @@ body {
   &__text {
     margin: 0;
     font-weight: 300;
-    font-size: 24px;
+    font-size: 16px;
     color: $white;
   }
 }
