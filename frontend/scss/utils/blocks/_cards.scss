@@ -1,7 +1,7 @@
 .cards {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, $w*5.4);
+    grid-template-columns: repeat(5, 1fr);
     &__title {
         grid-column: 1 / -1;
         width: 100%;
@@ -9,5 +9,23 @@
         color: $black;
         font-weight: 600;
         margin-bottom: 60px;
+    }
+}
+
+@media (max-width: 1919px) {
+    .cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1450px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

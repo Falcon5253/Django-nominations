@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -6,7 +6,7 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;600,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
 html {
   line-height: 1.15;
   /* 1 */
@@ -380,11 +380,17 @@ template {
   font-weight: 400;
   font-size: 28px;
 }
+.header__open-burger-button {
+  display: none;
+}
+.header__close-burger-button {
+  display: none;
+}
 .header__form {
   position: relative;
   grid-area: search;
-  width: 816px;
-  height: 60px;
+  width: 848px;
+  height: 54px;
   justify-self: start;
 }
 .header__search-field {
@@ -395,7 +401,7 @@ template {
 }
 .header__search-button {
   top: 0;
-  height: 66px;
+  height: 60px;
   width: 70px;
   right: -8px;
   position: absolute;
@@ -406,6 +412,179 @@ template {
   cursor: pointer;
 }
 
+@media (max-width: 1919px) {
+  .header__list {
+    gap: 0;
+    justify-content: space-between;
+  }
+  .header__item {
+    width: 180px;
+  }
+  .header__link {
+    font-size: 24px;
+  }
+  .header__form {
+    width: 100%;
+  }
+}
+@media (max-width: 1450px) {
+  .header {
+    position: relative;
+    grid-template-areas: "logo search list";
+  }
+  .header__list {
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 5px;
+    position: absolute;
+    grid-area: none;
+    z-index: 10;
+    height: 100px;
+    padding-top: 50px;
+    top: -200px;
+    border: solid 2px #000000;
+    width: calc(100% + 256px);
+    justify-content: space-around;
+    background-color: #FFFFFF;
+  }
+  .header__item {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .header__logo {
+    width: 160px;
+  }
+  .header__open-burger-button {
+    display: block;
+    grid-area: list;
+    background: none;
+    border: none;
+    height: 62px;
+    width: 70px;
+    background-color: #6499FF;
+    border: solid 2px #000000;
+    border-radius: 5px;
+    margin-top: 4px;
+  }
+  .header__close-burger-button {
+    position: absolute;
+    z-index: 20;
+    height: 70px;
+    width: 70px;
+    background: none;
+    background-color: #6499FF;
+    border: solid 2px #000000;
+    border-radius: 70px;
+    top: 110px;
+  }
+  .header__form {
+    width: calc(100% - 60px);
+  }
+}
+@media (max-width: 970px) {
+  .header__item {
+    width: 20%;
+    margin-top: 0px;
+  }
+  .header__list {
+    padding-top: 40px;
+    top: -300px;
+    height: 200px;
+    gap: 5%;
+    justify-content: flex-start;
+  }
+  .header__close-burger-button {
+    top: 195px;
+  }
+}
+@media (max-width: 970px) {
+  .header__item {
+    width: 20%;
+    margin-top: 0px;
+  }
+  .header__list {
+    padding-top: 40px;
+    top: -300px;
+    height: 200px;
+    gap: 5%;
+    justify-content: flex-start;
+  }
+  .header__close-burger-button {
+    top: 195px;
+  }
+}
+@media (max-width: 799px) {
+  .header__item {
+    width: 25%;
+  }
+  .header__list {
+    justify-content: space-around;
+  }
+}
+@-webkit-keyframes open-menu {
+  0% {
+    top: -300px;
+  }
+  100% {
+    top: -30px;
+  }
+}
+@keyframes open-menu {
+  0% {
+    top: -300px;
+  }
+  100% {
+    top: -30px;
+  }
+}
+@-webkit-keyframes close-menu {
+  100% {
+    top: -300px;
+  }
+  0% {
+    top: -30px;
+  }
+}
+@keyframes close-menu {
+  100% {
+    top: -300px;
+  }
+  0% {
+    top: -30px;
+  }
+}
+@-webkit-keyframes appear {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes appear {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+@-webkit-keyframes disappear {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
+@keyframes disappear {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
 .button {
   background-color: #6499FF;
   border: solid 2px #000000;
@@ -417,7 +596,7 @@ template {
 .cards {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 345.6px);
+  grid-template-columns: repeat(5, 1fr);
 }
 .cards__title {
   grid-column: 1/-1;
@@ -428,6 +607,21 @@ template {
   margin-bottom: 60px;
 }
 
+@media (max-width: 1919px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1450px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 1100px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .card {
   margin-bottom: 64px;
   max-width: 384px;
@@ -550,7 +744,7 @@ template {
 }
 
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   position: relative;
   min-height: 100%;

@@ -32,13 +32,18 @@
         padding-top: 14px;
         font-weight: 400;
         font-size: 28px;
-
+    }
+    &__open-burger-button {
+        display: none;
+    }
+    &__close-burger-button {
+        display: none;
     }
     &__form {
         position: relative;
         grid-area: search;
-        width: 816px;
-        height: 60px;
+        width: 848px;
+        height: 54px;
         justify-self: start;
     }
     &__search-field {
@@ -49,7 +54,7 @@
     }
     &__search-button {
         top: 0;
-        height: 66px;
+        height: 60px;
         width: 70px;
         right: -8px;
         position: absolute;
@@ -58,5 +63,168 @@
     }
     &__search-button:hover {
         cursor: pointer;
+    }
+}
+
+
+@media (max-width: 1919px) {
+    .header {
+        &__list {
+            gap: 0;
+            justify-content: space-between;
+        }
+        &__item {
+            width: 180px;
+        }
+        &__link {
+            font-size: 24px;
+    
+        }
+        &__form {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 1450px) {
+    .header {
+        position: relative;
+        grid-template-areas:
+        'logo search list';
+        &__list {
+            overflow: hidden;
+            flex-wrap: wrap;
+            gap: 5px;
+            position: absolute;
+            grid-area: none;
+            z-index: 10;
+            height: 100px;
+            padding-top: 50px;
+            top: -200px;
+            border: solid 2px $black;
+            width: calc(100% + $w*4);
+            justify-content: space-around;
+            background-color: $white;
+        }
+        &__item {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        &__logo {
+            width: 160px;
+        }
+        &__open-burger-button {
+            display: block;
+            grid-area: list;
+            background: none;
+            border: none;
+            height: 62px;
+            width: 70px;
+            background-color: $blue;
+            border: solid 2px $black;
+            border-radius: 5px;
+            margin-top: 4px;
+        }
+        &__close-burger-button {
+            position: absolute;
+            z-index: 20;
+            // display: none;
+            // opacity: 0%;
+            height: 70px;
+            width: 70px;
+            background: none;
+            background-color: $blue;
+            border: solid 2px $black;
+            border-radius: 70px;
+            top: 110px;
+        }
+        &__form {
+            width: calc(100% - 60px);
+        }
+    }
+}
+
+
+
+@media (max-width: 970px) {
+    .header {
+        &__item {
+            width: 20%;
+            margin-top: 0px;
+        }
+        &__list {
+            padding-top: 40px;
+            top: -300px;
+            height: 200px;
+            gap: 5%;
+            justify-content: flex-start;
+        }
+        &__close-burger-button {
+            top: 195px;
+        }
+    }
+}
+
+@media (max-width: 970px) {
+    .header {
+        &__item {
+            width: 20%;
+            margin-top: 0px;
+        }
+        &__list {
+            padding-top: 40px;
+            top: -300px;
+            height: 200px;
+            gap: 5%;
+            justify-content: flex-start;
+        }
+        &__close-burger-button {
+            top: 195px;
+        }
+    }
+}
+
+@media (max-width: 799px) {
+    .header {
+        &__item {
+            width: 25%;
+        }
+        &__list {
+            justify-content: space-around;
+        }
+    }
+}
+
+@keyframes open-menu {
+    0% {
+        top: -300px;
+    }
+    100% {
+        top: -30px;
+    }
+}
+@keyframes close-menu {
+    100% {
+        top: -300px;
+    }
+    0% {
+        top: -30px;
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+@keyframes disappear {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0%;
     }
 }
