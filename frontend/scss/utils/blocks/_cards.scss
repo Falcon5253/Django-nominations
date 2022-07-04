@@ -1,0 +1,13 @@
+.cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, $w*6);
+    &__title {
+        grid-column: 1 / -1;
+        width: 100%;
+        font-size: 48px;
+        color: $black;
+        font-weight: 600;
+        margin-bottom: 60px;
+    }
+}

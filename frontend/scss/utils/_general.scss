@@ -1,1 +1,53 @@
-// @import "blocks/tags";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;600,700;1,400&display=swap');
+@import "blocks/header";
+@import "blocks/button";
+@import "blocks/cards";
+@import "blocks/card";
+@import "blocks/contacts";
+
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  position: relative;
+}
+
+body {
+  width: calc(100% - ($w * 2));
+  margin: 0 auto 0 auto;
+  margin-bottom: $w*7;
+}
+
+.visually-hidden {
+  display: none;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  height: $w*5;
+  text-align: center;
+}
+
+.made-by {
+  background-color: $bright-black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $w;
+  width: 100%;
+  &__text {
+    margin: 0;
+    font-weight: 300;
+    font-size: 24px;
+    color: $white;
+  }
+}
+
+@media (min-width: 1920px) {
+  body {
+    width: 1736px;
+  }
+}

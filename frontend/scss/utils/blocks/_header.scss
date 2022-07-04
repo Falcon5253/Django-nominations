@@ -1,0 +1,62 @@
+.header {
+    display: grid;
+    grid-template-columns: 3fr 16fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    'logo list'
+    'logo search';
+    justify-items: center;
+    align-items: center;
+    &__logo {
+        width: $w*3;
+        grid-area: logo;
+        margin-right: 10px;
+    }
+    &__list {
+        grid-area: list;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 0;
+    }
+    &__item {
+        list-style: none;
+        width: 240px;
+        height: max-content;
+        height: 60px;
+    }
+    &__link {
+        display: block;
+        width: 100%;
+        height: 46px;
+        padding-top: 14px;
+        font-weight: 400;
+        font-size: 28px;
+
+    }
+    &__form {
+        position: relative;
+        grid-area: search;
+        width: 816px;
+        height: 60px;
+        justify-self: start;
+    }
+    &__search-field {
+        width: 100%;
+        height: 100%;
+        font-size: 28px;
+        border: solid 2px $black;
+    }
+    &__search-button {
+        top: 0;
+        height: 66px;
+        width: 70px;
+        right: -8px;
+        position: absolute;
+        background: none;
+        border: none;
+    }
+    &__search-button:hover {
+        cursor: pointer;
+    }
+}
