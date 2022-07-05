@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.db import models
 from nominations.models import Nomination
 from organizer.models import Organizer
