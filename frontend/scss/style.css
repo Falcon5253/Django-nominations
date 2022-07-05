@@ -430,6 +430,8 @@ template {
 @media (max-width: 1450px) {
   .header {
     position: relative;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-areas: "logo search list";
   }
   .header__list {
@@ -495,6 +497,26 @@ template {
   }
   .header__close-burger-button {
     top: 195px;
+  }
+}
+@media (max-width: 1100px) {
+  .header__logo {
+    width: 100px;
+  }
+  .header__form {
+    height: 39px;
+    width: calc(100% - 30px);
+  }
+  .header__search-button {
+    height: 45px;
+    width: 50px;
+    font-size: 10px;
+  }
+  .header__open-burger-button {
+    font-size: 10px;
+    height: 46px;
+    width: 50px;
+    margin-top: 6.5px;
   }
 }
 @media (max-width: 970px) {
@@ -612,12 +634,16 @@ template {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media (max-width: 1450px) {
+@media (max-width: 1350px) {
   .cards {
     grid-template-columns: repeat(3, 1fr);
   }
+  .cards__title {
+    font-size: 32px;
+    margin-bottom: 45px;
+  }
 }
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -748,10 +774,12 @@ html {
   font-style: normal;
   position: relative;
   min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  width: calc(100% - 256px);
+  width: 1736px;
   margin: 0 auto 0 auto;
   margin-bottom: 448px;
 }
@@ -763,10 +791,11 @@ body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 102%;
   left: 0;
   height: 320px;
   text-align: center;
+  overflow: hidden;
 }
 
 .made-by {
@@ -784,8 +813,13 @@ body {
   color: #FFFFFF;
 }
 
-@media (min-width: 1920px) {
+@media (max-width: 1920px) {
   body {
-    width: 1736px;
+    width: calc(100% - 256px);
+  }
+}
+@media (max-width: 1450px) {
+  body {
+    width: calc(100% - 64px);
   }
 }/*# sourceMappingURL=style.css.map */

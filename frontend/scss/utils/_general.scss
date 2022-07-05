@@ -12,10 +12,12 @@ html {
   font-style: normal;
   position: relative;
   min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  width: calc(100% - ($w * 4));
+  width: 1736px;
   margin: 0 auto 0 auto;
   margin-bottom: $w*7;
 }
@@ -27,10 +29,11 @@ body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 102%;
   left: 0;
   height: $w*5;
   text-align: center;
+  overflow: hidden;
 }
 
 .made-by {
@@ -48,8 +51,14 @@ body {
   }
 }
 
-@media (min-width: 1920px) {
+@media (max-width: 1920px) {
   body {
-    width: 1736px;
+    width: calc(100% - ($w * 4));
+  }
+}
+
+@media (max-width: 1450px) {
+  body {
+    width: calc(100% - ($w));
   }
 }

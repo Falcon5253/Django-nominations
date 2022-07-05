@@ -89,6 +89,8 @@
 @media (max-width: 1450px) {
     .header {
         position: relative;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 8fr 1fr;
         grid-template-areas:
         'logo search list';
         &__list {
@@ -161,6 +163,29 @@
         }
         &__close-burger-button {
             top: 195px;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .header {
+        &__logo {
+            width: 100px;
+        }
+        &__form {
+            height: 39px;
+            width: calc(100% - 30px);
+        }
+        &__search-button {
+            height: 45px;
+            width: 50px;
+            font-size: 10px;
+        }
+        &__open-burger-button {
+            font-size: 10px;
+            height: 46px;
+            width: 50px;
+            margin-top: 6.5px;
         }
     }
 }

@@ -18,13 +18,17 @@
     }
 }
 
-@media (max-width: 1450px) {
+@media (max-width: 1350px) {
     .cards {
         grid-template-columns: repeat(3, 1fr);
+        &__title {
+            font-size: 32px;
+            margin-bottom: 45px;
+        }
     }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
