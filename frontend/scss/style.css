@@ -445,7 +445,7 @@ template {
     padding-top: 50px;
     top: -200px;
     border: solid 2px #000000;
-    width: calc(100% + 256px);
+    width: 100%;
     justify-content: space-around;
     background-color: #FFFFFF;
   }
@@ -791,11 +791,10 @@ body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 102%;
+  width: 100%;
   left: 0;
   height: 320px;
   text-align: center;
-  overflow: hidden;
 }
 
 .made-by {
