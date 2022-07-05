@@ -502,14 +502,14 @@ template {
     margin-top: 6.5px;
   }
 }
-@media (max-width: 970px) {
+@media (max-width: 1034px) {
   .header__item {
     width: 20%;
     margin-top: 0px;
   }
   .header__list {
     padding-top: 40px;
-    top: -300px;
+    top: -500px;
     height: 200px;
     gap: 5%;
     justify-content: flex-start;
@@ -526,9 +526,44 @@ template {
     justify-content: space-around;
   }
 }
+@media (max-width: 675px) {
+  .header__item {
+    width: 220px;
+    height: 30px;
+  }
+  .header__link {
+    padding-top: 5px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .header__close-burger-button {
+    top: 235px;
+    height: 40px;
+    width: 40px;
+  }
+  .header__list {
+    gap: 15px;
+    padding-top: 20px;
+    height: 244px;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (max-width: 425px) {
+  .header {
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas: "logo logo" "search list";
+    align-items: center;
+  }
+  .header__logo {
+    width: 220px;
+    margin-right: 0px;
+  }
+}
 @-webkit-keyframes open-menu {
   0% {
-    top: -300px;
+    top: -500px;
   }
   100% {
     top: -30px;
@@ -536,7 +571,7 @@ template {
 }
 @keyframes open-menu {
   0% {
-    top: -300px;
+    top: -500px;
   }
   100% {
     top: -30px;
@@ -544,7 +579,7 @@ template {
 }
 @-webkit-keyframes close-menu {
   100% {
-    top: -300px;
+    top: -500px;
   }
   0% {
     top: -30px;
@@ -552,7 +587,7 @@ template {
 }
 @keyframes close-menu {
   100% {
-    top: -300px;
+    top: -500px;
   }
   0% {
     top: -30px;
@@ -631,6 +666,16 @@ template {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+@media (max-width: 650px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+  }
+  .cards__title {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+}
 .card {
   margin-bottom: 64px;
   max-width: 384px;
@@ -681,6 +726,33 @@ template {
   font-weight: 400;
 }
 
+@media (max-width: 650px) {
+  .card {
+    margin-bottom: 45px;
+    height: 341.3333333333px;
+    gap: 0px;
+  }
+  .card__title {
+    margin-bottom: 10px;
+  }
+  .card__textfield {
+    height: 42.6666666667px;
+    width: 192px;
+  }
+  .card__img {
+    width: 192px;
+    height: 256px;
+  }
+  .card__nickname {
+    font-size: 13.3333333333px;
+  }
+  .card__nomination {
+    font-size: 13.3333333333px;
+  }
+  .card__nomination-description {
+    font-size: 10.6666666667px;
+  }
+}
 .contacts {
   height: 256px;
 }
@@ -701,6 +773,27 @@ template {
   color: #000000;
 }
 
+@media (max-width: 1034px) {
+  .contacts {
+    height: 128px;
+  }
+  .contacts__title {
+    font-size: 15px;
+    font-weight: 300;
+    color: #000000;
+    margin-top: 0;
+  }
+  .contacts__phone {
+    font-size: 15px;
+    font-weight: 300;
+    color: #000000;
+  }
+  .contacts__mail {
+    font-size: 15px;
+    font-weight: 300;
+    color: #000000;
+  }
+}
 .form {
   margin-top: 50px;
   width: 100%;
@@ -752,6 +845,65 @@ template {
   font-size: 28px;
 }
 
+@media (max-width: 1034px) {
+  .form__labels {
+    left: calc(50% - 200px - 83.2px);
+    gap: 10px;
+  }
+  .form__label {
+    display: block;
+    height: 44px;
+    font-size: 14px;
+    text-align: right;
+  }
+  .form__input {
+    display: block;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    font-size: 14px;
+  }
+  .form__input--textarea {
+    height: 180px;
+    resize: none;
+  }
+  .form__input[type=submit]:hover {
+    cursor: pointer;
+  }
+  .form__input--file {
+    padding-top: 15px;
+    font-size: 12px;
+    height: 29px;
+  }
+  .form__input--reg-button {
+    padding-top: 9px;
+    height: 27px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    gap: 35px;
+  }
+  .form__labels {
+    left: 2px;
+    align-items: flex-start;
+    gap: 35px;
+    top: -20px;
+  }
+  .form__input {
+    width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .form {
+    width: 95%;
+  }
+}
 html {
   font-family: "Open Sans", sans-serif;
   font-style: normal;
@@ -803,5 +955,22 @@ body {
 @media (max-width: 1450px) {
   body {
     width: calc(100% - 64px);
+  }
+}
+@media (max-width: 1034px) {
+  .footer {
+    height: 160px;
+  }
+
+  .made-by {
+    height: 32px;
+  }
+  .made-by__text {
+    font-weight: 300;
+    font-size: 10px;
+  }
+
+  body {
+    margin-bottom: 224px;
   }
 }/*# sourceMappingURL=style.css.map */

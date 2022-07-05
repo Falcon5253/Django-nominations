@@ -61,3 +61,19 @@ body {
     width: calc(100% - ($w));
   }
 }
+
+@media (max-width: 1034px) {
+  .footer {
+    height: $w*2.5;
+  }
+  .made-by {
+    height: $w/2;
+    &__text {
+      font-weight: 300;
+      font-size: 10px;
+    }
+  }
+  body {
+    margin-bottom: $w*3.5;
+  }
+}
