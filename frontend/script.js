@@ -1,4 +1,4 @@
-let api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/auth/"
+let api_ip = "https://justcors.com/tl_64a5ab6/http://django-nominations.std-1867.ist.mospolytech.ru/api/auth/"
 
 
 fetch(api_ip, { method:'GET'}).then(
