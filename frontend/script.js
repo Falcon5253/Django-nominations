@@ -1,4 +1,4 @@
-let api_ip = "http://127.0.0.1:8000/api/auth/"
+let api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/auth/"
 
 
 fetch(api_ip, { method:'GET'}).then(
