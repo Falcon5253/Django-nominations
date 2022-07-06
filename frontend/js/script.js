@@ -62,7 +62,7 @@ function get_new_competitions() {
                                 </div>`
                             }
                         }
-                        document.querySelectorAll('.cards')[1].innerHTML = cards;
+                        document.querySelector('#current_nominations').innerHTML = cards;
                     }
                 )
                 .catch(
@@ -124,7 +124,7 @@ function get_old_competitions() {
                                 </div>`
                             }
                         }
-                        document.querySelectorAll('.cards')[0].innerHTML = cards;
+                        document.querySelector('#previous_nominations').innerHTML = cards;
                     }
                 )
                 .catch(
