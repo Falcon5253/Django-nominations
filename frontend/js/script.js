@@ -35,32 +35,34 @@ function get_new_competitions() {
                 }
                 )
                 .then (        
-                    comps => {
+                    nominations => {
                         let title = '';
                         description = '';
                         cards = `<h2 class='cards__title'>Актуальные номинации</h2>`;
                         for (let i = 0; i < data.length; i++) {
-                            for (let j = 0; j < comps.length; j++) {
-                                if (data[i]['nomination_id']==comps[j]['id']) {
-                                    title = comps[j]['title'];
-                                    description = comps[j]['description'];
+                            for (let j = 0; j < nominations.length; j++) {
+                                if (data[i]['nomination_id'] == nominations[j]['id']) {
+                                    title = nominations[j]['title'];
+                                    description = nominations[j]['description'];
                                 }
                             }
-                            console.log(comps);
-                            console.log(data);
-                            // if(comps[i]['year']<=) сделать чтобы прошедшие номинации отображались не тут
-                                        cards += `
-                                        <div class='card'>
-                                            <img class='card__img' src="${data[i]['cover']}" alt="nomination picture">
-                                            <div class='card__textfield'>
-                                                <h3 class='card__nomination'>${title}</h3>
-                                            </div>
-                                            <div class='card__textfield'>
-                                                <p class='card__nomination-description'>${description}</p>
-                                            </div>
-                                        </div>`
+                            let comp_date = new Date(data[i]['year'])
+                            let today_date = new Date()
+                            title += ' (' + ('0'+comp_date.getDate()).slice(-2) + '.' + ('0'+(comp_date.getMonth()+1)).slice(-2) + '.' + comp_date.getFullYear() + ')';
+                            if(comp_date > today_date){
+                                cards += `
+                                <div class='card'>
+                                    <img class='card__img' src="${data[i]['cover']}" alt="nomination picture">
+                                    <div class='card__textfield'>
+                                        <h3 class='card__nomination'>${title}</h3>
+                                    </div>
+                                    <div class='card__textfield'>
+                                        <p class='card__nomination-description'>${description}</p>
+                                    </div>
+                                </div>`
+                            }
                         }
-                        document.querySelectorAll('.cards')[0].innerHTML = cards;
+                        document.querySelectorAll('.cards')[1].innerHTML = cards;
                     }
                 )
                 .catch(
@@ -78,7 +80,63 @@ function get_new_competitions() {
 }
 
 
-
-function get_nomination(nomination_id) {
-
+function get_old_competitions() {
+    fetch(api_ip+"competition/", { method:'GET'}).then(
+    response => {
+        // document.body.insertAdjacentHTML('beforeend', response.json());
+        return response.json();
+    }
+    )
+    .then (
+        data => {
+            let nominations = fetch(api_ip+"nominations/", { method:'GET'}).then(
+                response => {
+                    // document.body.insertAdjacentHTML('beforeend', response.json());
+                    return response.json();
+                }
+                )
+                .then (        
+                    nominations => {
+                        let title = '';
+                        description = '';
+                        cards = `<h2 class='cards__title'>Прошедшие номинации</h2>`;
+                        for (let i = 0; i < data.length; i++) {
+                            for (let j = 0; j < nominations.length; j++) {
+                                if (data[i]['nomination_id']==nominations[j]['id']) {
+                                    title = nominations[j]['title'];
+                                    description = nominations[j]['description'];
+                                }
+                            }
+                            let comp_date = new Date(data[i]['year']);
+                            let comp_date_string = new Date(data[i]['year'])
+                            let today_date = new Date();
+                            title += ' (' + ('0'+comp_date.getDate()).slice(-2) + '.' + ('0'+(comp_date.getMonth()+1)).slice(-2) + '.' + comp_date.getFullYear() + ')';
+                            if(comp_date <= today_date){
+                                cards += `
+                                <div class='card'>
+                                    <img class='card__img' src="${data[i]['cover']}" alt="nomination picture">
+                                    <div class='card__textfield'>
+                                        <h3 class='card__nomination'>${title}</h3>
+                                    </div>
+                                    <div class='card__textfield'>
+                                        <p class='card__nomination-description'>${description}</p>
+                                    </div>
+                                </div>`
+                            }
+                        }
+                        document.querySelectorAll('.cards')[0].innerHTML = cards;
+                    }
+                )
+                .catch(
+                    error => {
+                        console.log(error.statusText);
+                    }
+                )
+        }
+    )
+    .catch(
+        error => {
+            console.log(error.statusText);
+        }
+    )
 }
