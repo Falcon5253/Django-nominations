@@ -1,4 +1,5 @@
 from django.contrib.auth.models import BaseUserManager
+from rest_framework.authtoken.models import Token
 
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
@@ -8,8 +9,11 @@ class UserManager(BaseUserManager):
             last_name = last_name,
         )
 
+
+
         user.set_password(password)
         user.save()
+        Token.objects.create(user=user)
         
         return user
 

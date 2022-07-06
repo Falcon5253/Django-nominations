@@ -27,15 +27,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-
-class authtokenToken(models.Model):
-    key = models.CharField(verbose_name='ключ', max_length=255)
-    created = models.DateField(verbose_name='создан')
-    user_id = models.OneToOneField(verbose_name='Пользователь', to=User, related_name='token', on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Номинация'
-        verbose_name_plural = 'Номинации'

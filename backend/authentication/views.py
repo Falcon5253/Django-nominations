@@ -13,15 +13,6 @@ import environ
 from pathlib import Path
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(BASE_DIR / '.env')
-con = connector.connect(user=env('USER'),
-    host=env('HOST'),
-    database=env('NAME'),
-    password=env('PASSWORD'))
-
-
 
 
 class UserViewSet(ModelViewSet):
@@ -43,6 +34,7 @@ class UserViewSet(ModelViewSet):
     
     @action(methods=['POST'], detail=False, url_path='login')
     def login(self, request):
+        con = connect('db.sqlite3')
         if 'email' not in request.data:
             raise ValidationError({'error': 'email is empty'})
         if 'password' not in request.data:
@@ -58,6 +50,7 @@ class UserViewSet(ModelViewSet):
         cursor = con.cursor()
         query = ('SELECT * FROM `authtoken_token` WHERE `user_id`='+str(user.id))
         cursor.execute(query)
+        key = ''
         for j in cursor:
             key = j[0]
 
@@ -68,6 +61,7 @@ class UserViewSet(ModelViewSet):
 
     @action(methods=['GET'], detail=False, url_path='me')
     def get_user(self, request):
+        con = connect('db.sqlite3')
         data = {}
         if request.COOKIES.get('token'):
             cursor = con.cursor()
@@ -84,6 +78,7 @@ class UserViewSet(ModelViewSet):
 
     @action(methods=['POST'], detail=False, url_path='logout')
     def logout(self, request):
+        con = connect('db.sqlite3')
         response = Response()
         response.delete_cookie('token')
         response.data = {'logout':'success'}
