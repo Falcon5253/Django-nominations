@@ -33,6 +33,10 @@
         font-weight: 400;
         font-size: 28px;
     }
+    &__link--button {
+        padding-top: 0px;
+        height: 64px;
+    }
     &__open-burger-button {
         display: none;
     }
@@ -208,6 +212,10 @@
         &__link {
             padding-top: 5px;
             height: 30px;
+            font-size: 20px;
+        }
+        &__link--button {
+            height: 39px;
             font-size: 20px;
         }
         &__close-burger-button {

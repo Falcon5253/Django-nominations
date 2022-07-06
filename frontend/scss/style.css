@@ -380,6 +380,10 @@ template {
   font-weight: 400;
   font-size: 28px;
 }
+.header__link--button {
+  padding-top: 0px;
+  height: 64px;
+}
 .header__open-burger-button {
   display: none;
 }
@@ -536,6 +540,10 @@ template {
     height: 30px;
     font-size: 20px;
   }
+  .header__link--button {
+    height: 39px;
+    font-size: 20px;
+  }
   .header__close-burger-button {
     top: 235px;
     height: 40px;
@@ -635,6 +643,16 @@ template {
 
 .button--green {
   background-color: #67FF64;
+}
+
+.button:hover {
+  background-color: #3624FF;
+  cursor: pointer;
+}
+
+.button--green:hover {
+  background-color: #03c500;
+  cursor: pointer;
 }
 
 .cards {
@@ -1060,6 +1078,10 @@ html {
   overflow-x: hidden;
 }
 
+p:hover, h1:hover, h2:hover, h3:hover, h4:hover {
+  cursor: default;
+}
+
 body {
   width: 1736px;
   margin: 0 auto 0 auto;
@@ -1092,6 +1114,23 @@ body {
   font-weight: 300;
   font-size: 16px;
   color: #FFFFFF;
+}
+
+.error {
+  background-color: #353535;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.error__title {
+  color: red;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
 }
 
 @media (max-width: 1920px) {

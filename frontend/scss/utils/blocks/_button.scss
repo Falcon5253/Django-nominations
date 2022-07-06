@@ -8,3 +8,13 @@
 .button--green {
     background-color: $green;
 }
+
+.button:hover{
+    background-color: $dblue;
+    cursor: pointer;
+}
+
+.button--green:hover {
+    background-color: $dgreen;
+    cursor: pointer;
+}

@@ -18,6 +18,10 @@ html {
   overflow-x: hidden;
 }
 
+p:hover, h1:hover, h2:hover, h3:hover, h4:hover {
+  cursor: default;
+}
+
 body {
   width: 1736px;
   margin: 0 auto 0 auto;
@@ -49,6 +53,23 @@ body {
     font-weight: 300;
     font-size: 16px;
     color: $white;
+  }
+}
+
+.error {
+  background-color: $bright-black;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  &__title {
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
   }
 }
 

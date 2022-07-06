@@ -8,7 +8,6 @@
     <title>Твой выбор</title>
 </head>
 <body>
-    <header class='header' w3-include-html='templates/header.html'></header>
     <main class='main'>
         <h1 class='visually-hidden'>Твой выбор - главная страница</h1>
         <section class='cards'>
@@ -37,12 +36,10 @@
         </section>
     </main>
     <footer class='footer' w3-include-html='templates/footer.html'></footer>
-    <script src='js/include.js'></script>
-    <script>
-        includeHTML();
-    </script>
     <script src='js/script.js'></script>
-    <script src='script.js'></script>
+    <script>check_header()</script>
+    <script src='js/include.js'></script>
+    <script>includeHTML();</script>
     <script>get_new_competitions()</script>
 </body>
 </html>

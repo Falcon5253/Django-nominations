@@ -8,7 +8,6 @@
     <title>Твой выбор - номинации</title>
 </head>
 <body>
-    <header class='header' w3-include-html='templates/header.html'></header></header>
     <main class='main'>
         <h1 class='visually-hidden'>Твой выбор - номинации</h1>
         <section id='current_nominations' class='cards'>
@@ -19,8 +18,9 @@
         </section>
     </main>
     <footer class='footer' w3-include-html='templates/footer.html'></footer>
-    <script src='js/include.js'></script>
     <script src='js/script.js'></script>
+    <script>check_header()</script>
+    <script src='js/include.js'></script>
     <script>get_new_competitions()</script>
     <script>get_old_competitions()</script>
 </body>

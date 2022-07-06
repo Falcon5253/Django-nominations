@@ -43,7 +43,6 @@ class UserViewSet(ModelViewSet):
             user = User.objects.get(email=request.data['email'])
         except User.DoesNotExist:
             raise NotFound({'error': 'user with this email was not found'})
-
         if not user.check_password(request.data['password']):
             raise AuthenticationFailed({'error': 'incorrect password'})
 
@@ -54,7 +53,7 @@ class UserViewSet(ModelViewSet):
         for j in cursor:
             key = j[0]
 
-        response = Response()
+        response = Response({'success':key})
         response.set_cookie('token', key)
         return response
 
@@ -62,7 +61,7 @@ class UserViewSet(ModelViewSet):
     @action(methods=['GET'], detail=False, url_path='me')
     def get_user(self, request):
         con = connect('db.sqlite3')
-        data = {}
+        data = {'error':'Не авторизованный пользователь'}
         if request.COOKIES.get('token'):
             cursor = con.cursor()
             query = ('SELECT * FROM `authtoken_token` WHERE `key`="'+str(request.COOKIES.get('token'))+'"')
@@ -72,14 +71,4 @@ class UserViewSet(ModelViewSet):
             user = User.objects.get(id=user_id)
             # user = User.objects.get(id=)
             data = self.serializer_class(user).data
-        
         return Response(data)
-
-
-    @action(methods=['POST'], detail=False, url_path='logout')
-    def logout(self, request):
-        con = connect('db.sqlite3')
-        response = Response()
-        response.delete_cookie('token')
-        response.data = {'logout':'success'}
-        return response
