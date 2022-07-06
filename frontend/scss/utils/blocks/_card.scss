@@ -1,0 +1,78 @@
+.card {
+    margin-bottom: $w;
+    max-width: $w*6;
+    height: $w*7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    &__img {
+        width: $w*4;
+        border: solid 2px $black;
+        height: $w*5;
+    }
+    &__img:hover {
+        cursor: pointer;
+    }
+    &__textfield {
+        height: $w;
+        width: $w*4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__nickname {
+        display: block;
+        font-size: $card-text;
+        text-align: center;
+        font-weight: 500;
+        margin: 0;
+        margin-top: 10px;
+    }
+    &__nomination {
+        margin: 0;
+        display: block;
+        font-size: $card-text;
+        text-align: center;
+        color: $dblue;
+        font-weight: 500;
+    }
+    &__nomination-description {
+        font-size: $card-text-description;
+        color: $black;
+        text-align: center;
+        margin: 0;
+        display: block;
+        font-weight: 400;
+    }
+    &__button {
+        width: 100%;
+        height: 100%;
+    }
+}
+@media (max-width: 650px) {
+    .card {
+        margin-bottom: 45px;
+        height: $w*16/3;
+        gap: 0px;
+        &__textfield {
+            height: $w/1.5;
+            width: $w*3;
+        }
+        &__img {
+            width: $w*3;
+            height: $w*4;
+        }
+        &__nickname {
+            font-size: $card-text/1.5;
+        }
+        &__nomination {
+
+            font-size: $card-text/1.5;
+        }
+        &__nomination-description {
+            font-size: $card-text-description/1.5;
+        }
+    }
+}

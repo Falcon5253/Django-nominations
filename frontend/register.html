@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scss/style.css">
+    <title>Твой выбор - регистрация</title>
+</head>
+<body>
+    <header class='header' w3-include-html='templates/header.html'></header></header>
+    <main class='main'>
+        <h1 class='visually-hidden'>Твой выбор - регистрация</h1>
+        <form class='form' action='auth/register'>
+            <div class='form__labels'>
+                <label class='form__label' for="email">Почта</label>
+                <label class='form__label' for="password">Пароль</label>
+                <label class='form__label' for="tel">Телефон</label>
+                <label class='form__label' for="first_name">Имя</label>
+                <label class='form__label' for="last_name">Фамилия</label>
+                <label class='form__label' for="profile_image">Фото</label>
+                <label class='form__label' for="about_me">О себе</label>
+
+            </div>
+            <input class='form__input' type="text" name="email" id="email">
+            <input class='form__input' type="text" name="password" id="password">
+            <input class='form__input' type="tel" id='tel' name='phone_number'>
+            <input class='form__input' type="text" name='first_name' id='first_name'>
+            <input class='form__input' type="text" name='last_name' id='last_name'>
+            <input class='form__input form__input--file' type="file" name="profile_image" id="profile_image">
+            <textarea class='form__input form__input--textarea' name="about_me" id="about_me" rows="3"></textarea>
+            <input class='form__input button' type="submit" value='Зарегистрироваться'>
+
+
+        </form>
+    </main>
+    <footer class='footer' w3-include-html='templates/footer.html'></footer>
+    <script src='js/include.js'></script>
+    <script src='js/script.js'></script>
+</body>
+</html>

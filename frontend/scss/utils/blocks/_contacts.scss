@@ -1,0 +1,41 @@
+.contacts {
+    height: $w*4;
+    &__title {
+        font-size: 30px;
+        font-weight: 300;
+        color: $black;
+        margin-top: 0;
+    }
+    &__phone {
+        font-size: 30px;
+        font-weight: 300;
+        color: $black
+    }
+    &__mail {
+        font-size: 30px;
+        font-weight: 300;
+        color: $black
+    }
+}
+
+@media (max-width: 1034px) {
+    .contacts {
+        height: $w*2;
+        &__title {
+            font-size: 15px;
+            font-weight: 300;
+            color: $black;
+            margin-top: 0;
+        }
+        &__phone {
+            font-size: 15px;
+            font-weight: 300;
+            color: $black
+        }
+        &__mail {
+            font-size: 15px;
+            font-weight: 300;
+            color: $black
+        }
+    }
+}
