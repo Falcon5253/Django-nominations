@@ -6,7 +6,7 @@ from organizer.models import Organizer
 class Competition(models.Model):
     nomination_id = models.ForeignKey(to=Nomination, verbose_name='nomination', related_name='competition', on_delete=models.CASCADE)
     year = models.DateField(verbose_name='Дата')
-    organizer_id = models.ManyToManyField(to=Organizer, verbose_name='organizer', related_name='competition', on_delete=models.CASCADE)
+    organizer_id = models.ManyToManyField(to=Organizer, verbose_name='organizer', related_name='competition')
     cover = models.ImageField(verbose_name='Обложка', upload_to='competition/cover')
 
     def __str__(self):
