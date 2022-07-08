@@ -721,8 +721,6 @@ template {
 }
 .card {
   margin-bottom: 64px;
-  -moz-column-break-inside: auto;
-       break-inside: auto;
   max-width: 384px;
   height: 448px;
   display: flex;
@@ -962,16 +960,18 @@ template {
   margin-bottom: 60px;
 }
 .nomination__interactions {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+  height: 576px;
+  width: 384px;
 }
 .nomination__img {
   width: 100%;
   border: solid 2px #000000;
+  height: 100%;
 }
 .nomination__button {
   width: 100%;
@@ -1009,7 +1009,8 @@ template {
     height: 51.2px;
   }
   .nomination__interactions {
-    max-width: 300px;
+    width: 256px;
+    height: 384px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1035,7 +1036,8 @@ template {
   margin-bottom: 60px;
 }
 .profile__interactions {
-  width: 100%;
+  height: 704px;
+  width: 384px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1106,7 +1108,8 @@ template {
     height: 51.2px;
   }
   .profile__interactions {
-    max-width: 300px;
+    width: 256px;
+    height: 469.3333333333px;
     margin-left: auto;
     margin-right: auto;
   }

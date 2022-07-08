@@ -16,7 +16,6 @@ function setCookie(name, value, options = {}) {
 
     options = {
       path: '/',
-      // при необходимости добавьте другие значения по умолчанию
       ...options
     };
   
@@ -63,48 +62,55 @@ function get_new_competitions() {
     )
     .then (
         data => {
-            let nominations = fetch(api_ip+"nominations/", { method:'GET'}).then(
+            fetch(api_ip+"nominations/", { method:'GET'})
+            .then(
                 response => {
                     // document.body.insertAdjacentHTML('beforeend', response.json());
                     return response.json();
                 }
-                )
-                .then (        
-                    nominations => {
-                        let title = '';
-                        description = '';
-                        cards = `<h2 class='cards__title'>Актуальные номинации</h2>`;
-                        for (let i = 0; i < data.length; i++) {
-                            for (let j = 0; j < nominations.length; j++) {
-                                if (data[i]['nomination_id'] == nominations[j]['id']) {
-                                    title = nominations[j]['title'];
-                                    description = nominations[j]['description'];
-                                }
-                            }
-                            let comp_date = new Date(data[i]['year'])
-                            let today_date = new Date()
-                            title += ' (' + ('0'+comp_date.getDate()).slice(-2) + '.' + ('0'+(comp_date.getMonth()+1)).slice(-2) + '.' + comp_date.getFullYear() + ')';
-                            if(comp_date > today_date){
-                                cards += `
-                                <div class='card'>
-                                    <img class='card__img' src="${data[i]['cover']}" alt="nomination picture">
-                                    <div class='card__textfield'>
-                                        <h3 class='card__nomination'>${title}</h3>
-                                    </div>
-                                    <div class='card__textfield'>
-                                        <p class='card__nomination-description'>${description}</p>
-                                    </div>
-                                </div>`
+            )
+            .then (        
+                nominations => {
+                    let title = ''; 
+                    description = '';
+                    cards = `<h2 class='cards__title'>Актуальные номинации</h2>`;
+                    for (let i = 0; i < data.length; i++) {
+                        for (let j = 0; j < nominations.length; j++) {
+                            if (data[i]['nomination_id'] == nominations[j]['id']) {
+                                title = nominations[j]['title'];
+                                description = nominations[j]['description'];
                             }
                         }
-                        document.querySelector('#current_nominations').innerHTML = cards;
+                        let comp_date = new Date(data[i]['year'])
+                        let today_date = new Date()
+                        title += ' (' + ('0'+comp_date.getDate()).slice(-2) + '.' + ('0'+(comp_date.getMonth()+1)).slice(-2) + '.' + comp_date.getFullYear() + ')';
+                        if(comp_date > today_date){
+                            cards += `
+                            <div class='card'  id='c${data[i]['id']}'>
+                                <img class='card__img' src="${data[i]['cover']}" alt="nomination picture">
+                                <div class='card__textfield'>
+                                    <h3 class='card__nomination'>${title}</h3>
+                                </div>
+                                <div class='card__textfield'>
+                                    <p class='card__nomination-description'>${description}</p>
+                                </div>
+                            </div>`
+                        }
                     }
-                )
-                .catch(
-                    error => {
-                        console.log(error.statusText);
-                    }
-                )
+                    document.querySelector('#current_nominations').innerHTML = cards;
+                    document.querySelectorAll('.card').forEach(element => {
+                        element.addEventListener('mouseup', event =>{
+                            console.log(event.currentTarget);
+                            window.location.href = 'nomination.html?id='+event.currentTarget.id.slice(1);
+                        })
+                    });
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error.statusText);
+                }
+            )
         }
     )
     .catch(
@@ -146,7 +152,7 @@ function get_old_competitions() {
                             title += ' (' + ('0'+comp_date.getDate()).slice(-2) + '.' + ('0'+(comp_date.getMonth()+1)).slice(-2) + '.' + comp_date.getFullYear() + ')';
                             if(comp_date <= today_date){
                                 cards += `
-                                <div class='card'>
+                                <div class='card' id='c${data[i]['id']}'>
                                     <img class='card__img' src="${data[i]['cover']}" alt="nomination picture">
                                     <div class='card__textfield'>
                                         <h3 class='card__nomination'>${title}</h3>
@@ -158,6 +164,12 @@ function get_old_competitions() {
                             }
                         }
                         document.querySelector('#previous_nominations').innerHTML = cards;
+                        document.querySelectorAll('.card').forEach(element => {
+                            element.addEventListener('mouseup', event =>{
+                                console.log(event.currentTarget);
+                                window.location.href = 'nomination.html?id='+event.currentTarget.id.slice(1);
+                            })
+                        })
                     }
                 )
                 .catch(
@@ -180,8 +192,40 @@ function get_winners() {
     then( response => {
         return response.json();
     })
-    .then (data => {
-        console.log(data)
+    .then (winners => {
+        console.log(winners)
+        winners.forEach(winner => {
+            fetch(api_ip + "competition/"+winner['competition_id'])
+            then( response => {
+                return response.json();
+            })
+            .then( competition => {
+                console.log(competition)
+                fetch(api_ip + "nomination/"+competition['nomination_id'])
+                then( response => {
+                    return response.json();
+                })
+                .then( nomination => {
+                    console.log(nomination)
+                    fetch(api_ip + "participant/"+winner['participant_id'])
+                    then( response => {
+                        return response.json();
+                    })
+                    .then( participant => {
+                        console.log(participant)
+                        fetch(api_ip + "auth/"+participant['id'])
+                        then( response => {
+                            return response.json();
+                        })
+                        .then( user => {
+                            console.log(user)
+                        })
+                    })
+                })
+            })
+        })
+
+        .then (compe)
     })
 }
 
@@ -341,4 +385,51 @@ function check_footer(){
 function logout(){
     setCookie('token', '', {'max-age': -1});
     window.location.href = 'login.html';
+}
+
+
+function get_nomination(){
+    const id = new URL(window.location.href).searchParams.get('id');
+    fetch(api_ip + "competition/"+id)
+    .then(
+        response => {
+            return response.json();
+        }
+    )
+    .then( data=> {
+        fetch(api_ip+"nominations/"+data['nomination_id'], { method:'GET'})
+        .then(
+            response => {
+                return response.json();
+            }
+        )
+        .then (        
+            nomination => {
+                let title = nomination['title'];
+                let description = nomination['description'];
+                let cover = data['cover'];
+
+                // document.getElementById('nomination').innerHTML = 
+                // `
+                // <h2 class='nomination__title'>Номинация: ${title}</h2>
+                // <div class="nomination__interactions">
+                //     <img class='nomination__img' src="${cover}" alt="nomination picture">
+                //     <input class='nomination__button button--green' type="button" value='Участвовать'>
+                // </div>
+                // <div class="nomination__info">
+                //     <p class="nomination__info-title">О номинации:</p>
+                //     <p class="nomination__info-text">${description}</p>
+                //     <p class="nomination__info-title">Победитель: <a href="">Шарлота Заморская</a></p>
+                // </div>`
+                console.log(nomination)
+                console.log(data)
+            }
+        )
+        .catch(
+            error => {
+                console.log(error.statusText);
+            }
+        )
+    })
+
 }
