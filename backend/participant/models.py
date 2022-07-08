@@ -3,8 +3,8 @@ from authentication.models import User
 from competition.models import Competition
 
 class Participant(models.Model):
-    competition_id = models.ManyToManyField(verbose_name='competition', to=Competition)
-    user_id = models.OneToOneField(verbose_name='user', to=User, on_delete=models.CASCADE)
+    competition_id = models.ForeignKey(verbose_name='competition', to=Competition, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(verbose_name='user', to=User, on_delete=models.CASCADE)
     participations_number = models.IntegerField(verbose_name='число участий')
 
     def __str__(self):

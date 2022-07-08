@@ -316,7 +316,6 @@ function register_page_load() {
         )
         .then (
             data => {
-                console.log(1)
                 console.log(data);
                 if(data['message']=='success'){ 
                     fetch(api_ip + "auth/login/", {
