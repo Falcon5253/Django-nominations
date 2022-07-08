@@ -193,39 +193,47 @@ function get_winners() {
         return response.json();
     })
     .then (winners => {
-        console.log(winners)
         winners.forEach(winner => {
-            fetch(api_ip + "competition/"+winner['competition_id']+"/")
-            then( response => {
+            fetch(api_ip + "competition/"+winner['competititon_id']+"/")
+            .then( response => {
                 return response.json();
             })
             .then( competition => {
-                console.log(competition)
-                fetch(api_ip + "nomination/"+competition['nomination_id']+"/")
-                then( response => {
+                fetch(api_ip + "nominations/"+competition['nomination_id']+"/")
+                .then( response => {
                     return response.json();
                 })
                 .then( nomination => {
-                    console.log(nomination)
                     fetch(api_ip + "participant/"+winner['participant_id']+"/")
-                    then( response => {
+                    .then( response => {
                         return response.json();
                     })
                     .then( participant => {
-                        console.log(participant)
-                        fetch(api_ip + "auth/"+participant['id'])
-                        then( response => {
+                        fetch(api_ip + "auth/"+participant['id']+"/")
+                        .then( response => {
                             return response.json();
                         })
                         .then( user => {
-                            console.log(user)
+                            let first_name = user['first_name'];
+                            let last_name = user['last_name'];
+                            let winner_card =
+                            `
+                            <div class='card'>
+                                <img class='card__img' src="${user['photo']}" alt="profile picture">
+                                <div class='card__textfield'>
+                                    <h3 class='card__nickname'>${first_name} ${last_name}</h3>
+                                </div>
+                                <div class='card__textfield'>
+                                    <p class='card__nomination'>${nomination['title']}</p>
+                                </div>
+                            </div>`;
+                            document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card)
+
                         })
                     })
                 })
             })
         })
-
-        .then (compe)
     })
 }
 
