@@ -1,4 +1,4 @@
-const api_ip = "https://justcors.com/tl_5838f7f/http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
 // const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
@@ -291,7 +291,6 @@ function register_page_load() {
     let description = document.getElementById('description')
 
 
-
     register.addEventListener('click', (e)=>{
         form_data.append('photo', image.files[0]);
         form_data.append('password', password.value);
@@ -311,14 +310,15 @@ function register_page_load() {
         )
         .then(
             response => {
+                console.log(response)
                 return response.json();
             }
         )
         .then (
             data => {
+                console.log(1)
                 console.log(data);
                 if(data['message']=='success'){ 
-
                     fetch(api_ip + "auth/login/", {
                             headers: {
                                 'Accept': 'application/json',
@@ -439,5 +439,11 @@ function get_nomination(){
             }
         )
     })
+
+}
+
+
+
+function get_profile() {
 
 }
