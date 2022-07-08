@@ -18,3 +18,11 @@
     background-color: $dgreen;
     cursor: pointer;
 }
+
+.button:active{
+    background-color: $lblue;
+}
+
+.button--green:active {
+    background-color: $lgreen;
+}

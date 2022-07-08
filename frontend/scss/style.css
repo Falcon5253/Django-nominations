@@ -372,6 +372,12 @@ template {
   height: max-content;
   height: 60px;
 }
+.header__search-label {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 .header__link {
   display: block;
   width: 100%;
@@ -462,8 +468,12 @@ template {
   }
   .header__open-burger-button {
     display: block;
+    font-size: 0px;
     grid-area: list;
     background: none;
+    background-image: url(/../img/dots.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     border: none;
     height: 62px;
     width: 70px;
@@ -476,8 +486,12 @@ template {
     position: absolute;
     z-index: 20;
     height: 70px;
+    font-size: 0px;
     width: 70px;
     background: none;
+    background-image: url(/../img/close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: #6499FF;
     border: solid 2px #000000;
     border-radius: 70px;
@@ -500,7 +514,6 @@ template {
     font-size: 10px;
   }
   .header__open-burger-button {
-    font-size: 10px;
     height: 46px;
     width: 50px;
     margin-top: 6.5px;
@@ -655,6 +668,14 @@ template {
   cursor: pointer;
 }
 
+.button:active {
+  background-color: #80acff;
+}
+
+.button--green:active {
+  background-color: #99ff98;
+}
+
 .cards {
   width: 100%;
   display: grid;
@@ -700,6 +721,8 @@ template {
 }
 .card {
   margin-bottom: 64px;
+  -moz-column-break-inside: auto;
+       break-inside: auto;
   max-width: 384px;
   height: 448px;
   display: flex;
@@ -766,10 +789,7 @@ template {
     width: 192px;
     height: 256px;
   }
-  .card__nickname {
-    font-size: 13.3333333333px;
-  }
-  .card__nomination {
+  .card__nickname, .card__nomination {
     font-size: 13.3333333333px;
   }
   .card__nomination-description {
@@ -985,6 +1005,20 @@ template {
     grid-template-columns: 1fr;
     justify-items: start;
   }
+  .nomination__button {
+    height: 51.2px;
+  }
+  .nomination__interactions {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nomination__info-title {
+    font-size: 18px;
+  }
+  .nomination__info-text {
+    font-size: 14px;
+  }
 }
 .profile {
   width: 100%;
@@ -1034,24 +1068,24 @@ template {
   justify-content: center;
   align-items: center;
   margin: 0;
-  height: 76.8px;
-  font-size: 32px;
+  height: 44.8px;
+  font-size: 24px;
 }
 .profile__active-competition-name {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 76.8px;
-  font-size: 32px;
+  height: 44.8px;
+  font-size: 28px;
 }
 .profile__interactive-link {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 76.8px;
-  font-size: 32px;
+  height: 44.8px;
+  font-size: 24px;
 }
 
 @media (max-width: 1350px) {
@@ -1067,6 +1101,33 @@ template {
   .profile {
     grid-template-columns: 1fr;
     justify-items: start;
+  }
+  .profile__button {
+    height: 51.2px;
+  }
+  .profile__interactions {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .profile__info-title {
+    font-size: 16px;
+  }
+  .profile__info-text {
+    font-size: 14px;
+  }
+  .profile__active-competition {
+    height: 32px;
+    font-size: 16px;
+  }
+  .profile__active-competition-name {
+    height: 32px;
+    font-size: 18px;
+  }
+  .profile__interactive-link {
+    height: 32px;
+    font-size: 18px;
+    margin-bottom: 40px;
   }
 }
 html {
@@ -1158,5 +1219,36 @@ body {
 
   body {
     margin-bottom: 224px;
+  }
+}
+@media print {
+  .header {
+    display: none;
+  }
+
+  .cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-items: center;
+  }
+  .cards__title {
+    font-size: 1.2cm;
+    width: 100%;
+  }
+
+  .card {
+    height: 40vh;
+  }
+  .card__nickname, .card__nomination {
+    font-size: 0.4cm;
+  }
+
+  .made-by {
+    background: none;
+  }
+
+  .made-by__text {
+    color: black;
   }
 }/*# sourceMappingURL=style.css.map */

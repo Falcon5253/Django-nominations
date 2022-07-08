@@ -1,5 +1,6 @@
 .card {
     margin-bottom: $w;
+    break-inside: auto;
     max-width: $w*6;
     height: $w*7;
     display: flex;
@@ -54,25 +55,21 @@
 @media (max-width: 650px) {
     .card {
         margin-bottom: 45px;
-        height: $w*16/3;
+        height: calc($w * 16 / 3);
         gap: 0px;
         &__textfield {
-            height: $w/1.5;
+            height: calc($w / 1.5);
             width: $w*3;
         }
         &__img {
             width: $w*3;
             height: $w*4;
         }
-        &__nickname {
-            font-size: $card-text/1.5;
-        }
-        &__nomination {
-
-            font-size: $card-text/1.5;
+        &__nickname, &__nomination {
+            font-size: calc($card-text / 1.5);
         }
         &__nomination-description {
-            font-size: $card-text-description/1.5;
+            font-size: calc($card-text-description / 1.5);
         }
     }
 }

@@ -334,6 +334,10 @@ function check_header(){
 
 }
 
+function check_footer(){
+    document.body.insertAdjacentHTML('beforeend', `<footer class='footer' w3-include-html='templates/footer.html'></footer>`);
+}
+
 function logout(){
     setCookie('token', '', {'max-age': -1});
     window.location.href = 'login.html';
