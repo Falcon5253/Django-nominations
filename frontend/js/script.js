@@ -1,4 +1,4 @@
-const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+const api_ip = "https://justcors.com/tl_5838f7f/http://django-nominations.std-1867.ist.mospolytech.ru/api/"
 // const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
@@ -195,19 +195,19 @@ function get_winners() {
     .then (winners => {
         console.log(winners)
         winners.forEach(winner => {
-            fetch(api_ip + "competition/"+winner['competition_id'])
+            fetch(api_ip + "competition/"+winner['competition_id']+"/")
             then( response => {
                 return response.json();
             })
             .then( competition => {
                 console.log(competition)
-                fetch(api_ip + "nomination/"+competition['nomination_id'])
+                fetch(api_ip + "nomination/"+competition['nomination_id']+"/")
                 then( response => {
                     return response.json();
                 })
                 .then( nomination => {
                     console.log(nomination)
-                    fetch(api_ip + "participant/"+winner['participant_id'])
+                    fetch(api_ip + "participant/"+winner['participant_id']+"/")
                     then( response => {
                         return response.json();
                     })
@@ -390,14 +390,14 @@ function logout(){
 
 function get_nomination(){
     const id = new URL(window.location.href).searchParams.get('id');
-    fetch(api_ip + "competition/"+id)
+    fetch(api_ip + "competition/"+id+"/")
     .then(
         response => {
             return response.json();
         }
     )
     .then( data=> {
-        fetch(api_ip+"nominations/"+data['nomination_id'], { method:'GET'})
+        fetch(api_ip+"nominations/"+data['nomination_id']+"/", { method:'GET'})
         .then(
             response => {
                 return response.json();
@@ -409,18 +409,18 @@ function get_nomination(){
                 let description = nomination['description'];
                 let cover = data['cover'];
 
-                // document.getElementById('nomination').innerHTML = 
-                // `
-                // <h2 class='nomination__title'>Номинация: ${title}</h2>
-                // <div class="nomination__interactions">
-                //     <img class='nomination__img' src="${cover}" alt="nomination picture">
-                //     <input class='nomination__button button--green' type="button" value='Участвовать'>
-                // </div>
-                // <div class="nomination__info">
-                //     <p class="nomination__info-title">О номинации:</p>
-                //     <p class="nomination__info-text">${description}</p>
-                //     <p class="nomination__info-title">Победитель: <a href="">Шарлота Заморская</a></p>
-                // </div>`
+                document.getElementById('nomination').innerHTML = 
+                 `
+                 <h2 class='nomination__title'>Номинация: ${title}</h2>
+                 <div class="nomination__interactions">
+                     <img class='nomination__img' src="${cover}" alt="nomination picture">
+                     <input class='nomination__button button--green' type="button" value='Участвовать'>
+                 </div>
+                 <div class="nomination__info">
+                     <p class="nomination__info-title">О номинации:</p>
+                     <p class="nomination__info-text">${description}</p>
+                     <p class="nomination__info-title">Победитель: <a href="">Шарлота Заморская</a></p>
+                 </div>`
                 console.log(nomination)
                 console.log(data)
             }
