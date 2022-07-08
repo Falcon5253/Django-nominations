@@ -1,5 +1,5 @@
-// const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
-const api_ip = "http://127.0.0.1:8000/api/"
+const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+// const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -58,7 +58,6 @@ window.addEventListener("resize", function() {
 function get_new_competitions() {
     fetch(api_ip+"competition/", { method:'GET'}).then(
     response => {
-        // document.body.insertAdjacentHTML('beforeend', response.json());
         return response.json();
     }
     )
@@ -175,12 +174,24 @@ function get_old_competitions() {
     )
 }
 
+
+function get_winners() {
+    fetch(api_ip+"winners/", { method:'GET'}).
+    then( response => {
+        return response.json();
+    })
+    .then (data => {
+        console.log(data)
+    })
+}
+
+
 function login_page_load() {
-    const login_form = document.getElementById('submit');
-    const mail_input = document.getElementById('email');
-    const password_input = document.getElementById('password');
+    let login_form = document.getElementById('submit');
+    let mail_input = document.getElementById('email');
+    let password_input = document.getElementById('password');
     login_form.addEventListener('click', (e)=>{
-        // 
+        e.preventDefault();
         fetch(api_ip + "auth/login/", {
                 headers: {
                     'Accept': 'application/json',
@@ -204,7 +215,6 @@ function login_page_load() {
                 }
                 else {
                     setCookie('token', data['success'], {'max-age': 7200})
-                    // document.cookie = "token="+data['success'];
                     window.location.href = 'profile.html';
                 }
             }
@@ -213,8 +223,94 @@ function login_page_load() {
             error => {console.log('грусть')}
         )
     })
-    // login_form.setAttribute('action', api_ip + '/auth/login');
+}
 
+
+function register_page_load() {
+    const form_data = new FormData();
+
+    let register = document.getElementById('submit');
+    let mail = document.getElementById('email');
+    let first_name = document.getElementById('first_name');
+    let last_name = document.getElementById('last_name');
+    let password = document.getElementById('password');
+    let phone = document.getElementById('tel')
+    let image = document.getElementById('profile_image')
+    let description = document.getElementById('description')
+
+
+
+    register.addEventListener('click', (e)=>{
+        form_data.append('photo', image.files[0]);
+        form_data.append('password', password.value);
+        form_data.append('first_name', first_name.value);
+        form_data.append('last_name', last_name);
+        form_data.append('email', mail.value);
+        form_data.append('phone_number', phone.value);
+        form_data.append('description', description.value);
+        e.preventDefault();
+        fetch(api_ip + "auth/register/", {
+                headers: {
+                    'Accept': 'application/json',
+                },
+                method:'POST',
+                body: form_data
+            }
+        )
+        .then(
+            response => {
+                return response.json();
+            }
+        )
+        .then (
+            data => {
+                console.log(data);
+                if(data['message']=='success'){ 
+
+                    fetch(api_ip + "auth/login/", {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            method:'POST',
+                            body: JSON.stringify({'email': mail.value, 'password': password.value})
+                        }
+                    )
+                    .then(
+                        response => {
+                            return response.json();
+                        }
+                    )
+                    .then (
+                        data => {
+                            if(data.hasOwnProperty('error')){
+                                if (!document.getElementById('error')){
+                                    document.querySelector('.form').insertAdjacentHTML('beforebegin', invalid_data_field)
+                                }
+                            }
+                            else {
+                                setCookie('token', data['success'], {'max-age': 7200})
+                                window.location.href = 'profile.html';
+                            }
+                        }
+                    )
+                    .catch (
+                        error => {console.log('грусть')}
+                    )
+
+
+                }
+                else {
+                    // setCookie('token', data['success'], {'max-age': 7200})
+                    // document.cookie = "token="+data['success'];
+                    // window.location.href = 'profile.html';
+                }
+            }
+        )
+        .catch (
+            error => {console.log('грусть')}
+        )
+    })
 }
 
 

@@ -19,16 +19,15 @@
                 <label class='form__label' for="last_name">Фамилия</label>
                 <label class='form__label' for="profile_image">Фото</label>
                 <label class='form__label' for="about_me">О себе</label>
-
             </div>
             <input class='form__input' type="text" name="email" id="email">
             <input class='form__input' type="text" name="password" id="password">
             <input class='form__input' type="tel" id='tel' name='phone_number'>
             <input class='form__input' type="text" name='first_name' id='first_name'>
             <input class='form__input' type="text" name='last_name' id='last_name'>
-            <input class='form__input form__input--file' type="file" name="profile_image" id="profile_image">
-            <textarea class='form__input form__input--textarea' name="about_me" id="about_me" rows="3"></textarea>
-            <input class='form__input button' type="submit" value='Зарегистрироваться'>
+            <input class='form__input form__input--file' type="file" name="profile_image" id="profile_image" accept='image'>
+            <textarea id='description' class='form__input form__input--textarea' name="about_me" id="about_me" rows="3"></textarea>
+            <input class='form__input button' type="submit" id='submit' value='Зарегистрироваться'>
 
 
         </form>
@@ -37,5 +36,6 @@
     <script src='js/script.js'></script>
     <script>check_header()</script>
     <script src='js/include.js'></script>
+    <script>register_page_load()</script>
 </body>
 </html>
