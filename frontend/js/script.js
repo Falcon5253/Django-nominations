@@ -209,7 +209,8 @@ function get_winners() {
                         return response.json();
                     })
                     .then( participant => {
-                        fetch(api_ip + "auth/"+participant['id']+"/")
+                        console.log(participant);
+                        fetch(api_ip + "auth/"+participant['user_id']+"/")
                         .then( response => {
                             return response.json();
                         })
