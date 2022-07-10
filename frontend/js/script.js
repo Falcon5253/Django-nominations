@@ -1,5 +1,5 @@
-// const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
-const api_ip = "http://127.0.0.1:8000/api/"
+const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+// const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -425,7 +425,7 @@ function get_profile() {
         document.getElementById("profile").innerHTML = `
         ${head}
         <div class="profile__interactions">
-            <img class='profile__img' src="${api_ip.replace("api/", "")+"media/"+data['photo']}" alt="profile picture">
+            <img class='profile__img' src="${api_ip.replace("api/", "")+data['photo']}" alt="profile picture">
         </div>
         <div class="profile__info">
             <p class="profile__info-title">ФИО: ${data['first_name']} ${data['last_name']}</p>
