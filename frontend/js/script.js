@@ -100,8 +100,10 @@ function get_new_competitions() {
                     document.querySelector('#current_nominations').innerHTML = cards;
                     document.querySelectorAll('.card').forEach(element => {
                         element.addEventListener('click', event =>{
-                            console.log(event.currentTarget);
-                            window.location.href = 'nomination.html?id='+event.currentTarget.id.slice(1);
+                            if (event.currentTarget.id[0]=="c"){
+                                console.log(event.currentTarget);
+                                window.location.href = 'nomination.html?id='+event.currentTarget.id.slice(1);
+                            }
                         })
                     });
                 }
