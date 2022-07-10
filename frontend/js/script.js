@@ -457,7 +457,8 @@ function get_profile() {
 
 
 function get_participants(){
-    fetch(api_ip+"participant/participants/", {method: "POST", body: {'id': (window.location.href).searchParams.get('id')}})
+    const id = new URL(window.location.href).searchParams.get('id')
+    fetch(api_ip+"participant/participants/", {method: "POST", body: {'id': id}})
     .then(
         response => {
             return response.json();
