@@ -1,5 +1,5 @@
-const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
-// const api_ip = "http://127.0.0.1:8000/api/"
+// const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -188,53 +188,27 @@ function get_old_competitions() {
 
 
 function get_winners() {
-    fetch(api_ip+"winners/", { method:'GET'}).
-    then( response => {
+    fetch(api_ip+"winners/winners/", { method:'GET'})
+    .then( response => {
         return response.json();
     })
-    .then (winners => {
-        winners.forEach(winner => {
-            fetch(api_ip + "competition/"+winner['competititon_id']+"/")
-            .then( response => {
-                return response.json();
-            })
-            .then( competition => {
-                fetch(api_ip + "nominations/"+competition['nomination_id']+"/")
-                .then( response => {
-                    return response.json();
-                })
-                .then( nomination => {
-                    fetch(api_ip + "participant/"+winner['participant_id']+"/")
-                    .then( response => {
-                        return response.json();
-                    })
-                    .then( participant => {
-                        console.log(participant);
-                        fetch(api_ip + "auth/"+participant['user_id']+"/")
-                        .then( response => {
-                            return response.json();
-                        })
-                        .then( user => {
-                            let first_name = user['first_name'];
-                            let last_name = user['last_name'];
-                            let winner_card =
-                            `
-                            <div class='card'>
-                                <img class='card__img' src="${user['photo']}" alt="profile picture">
-                                <div class='card__textfield'>
-                                    <h3 class='card__nickname'>${first_name} ${last_name}</h3>
-                                </div>
-                                <div class='card__textfield'>
-                                    <p class='card__nomination'>${nomination['title']}</p>
-                                </div>
-                            </div>`;
-                            document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card)
+    .then( data => {
+        Object.values(data).forEach( winner => {
+            console.log(winner)
+            let winner_card =
+            `
+            <div class='card'>
+                <img class='card__img' src="${winner['photo']}" alt="profile picture">
+                <div class='card__textfield'>
+                    <h3 class='card__nickname'>${winner['first_name']} ${winner['last_name']}</h3>
+                </div>
+                <div class='card__textfield'>
+                    <p class='card__nomination'>${winner['nomination_title']} (${winner['year']})</p>
+                </div>
+            </div>`;
+            document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card)
+        } )
 
-                        })
-                    })
-                })
-            })
-        })
     })
 }
 
