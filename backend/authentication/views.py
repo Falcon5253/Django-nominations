@@ -62,6 +62,7 @@ class UserViewSet(ModelViewSet):
     def get_user(self, request):
         con = connect('db.sqlite3')
         data = {'error':'Не авторизованный пользователь'}
+        print(request.COOKIES)
         if request.COOKIES.get('token'):
             cursor = con.cursor()
             query = ('SELECT * FROM `authtoken_token` WHERE `key`="'+str(request.COOKIES.get('token'))+'"')

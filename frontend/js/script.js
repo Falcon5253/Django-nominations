@@ -99,7 +99,7 @@ function get_new_competitions() {
                     }
                     document.querySelector('#current_nominations').innerHTML = cards;
                     document.querySelectorAll('.card').forEach(element => {
-                        element.addEventListener('mouseup', event =>{
+                        element.addEventListener('click', event =>{
                             console.log(event.currentTarget);
                             window.location.href = 'nomination.html?id='+event.currentTarget.id.slice(1);
                         })
@@ -165,7 +165,7 @@ function get_old_competitions() {
                         }
                         document.querySelector('#previous_nominations').innerHTML = cards;
                         document.querySelectorAll('.card').forEach(element => {
-                            element.addEventListener('mouseup', event =>{
+                            element.addEventListener('click', event =>{
                                 console.log(event.currentTarget);
                                 window.location.href = 'nomination.html?id='+event.currentTarget.id.slice(1);
                             })
@@ -193,12 +193,13 @@ function get_winners() {
         return response.json();
     })
     .then( data => {
-        Object.values(data).forEach( winner => {
-            console.log(winner)
+        Object.keys(data).forEach( key => {
+            winner = data[key];
+            console.log(winner);
             let winner_card =
             `
-            <div class='card'>
-                <img class='card__img' src="${winner['photo']}" alt="profile picture">
+            <div class='card' id="p${key}">
+                <img class='card__img' src="${api_ip.replace("api/", "")+winner['photo']}" alt="profile picture">
                 <div class='card__textfield'>
                     <h3 class='card__nickname'>${winner['first_name']} ${winner['last_name']}</h3>
                 </div>
@@ -206,8 +207,11 @@ function get_winners() {
                     <p class='card__nomination'>${winner['nomination_title']} (${winner['year']})</p>
                 </div>
             </div>`;
-            document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card)
-        } )
+            document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card);
+            document.getElementById("p"+key).addEventListener('click', (e) => {
+                window.location.href = 'profile.html?id='+event.currentTarget.id.slice(1);
+            })
+        })
 
     })
 }
@@ -261,7 +265,6 @@ function register_page_load() {
     let first_name = document.getElementById('first_name');
     let last_name = document.getElementById('last_name');
     let password = document.getElementById('password');
-    let phone = document.getElementById('tel')
     let image = document.getElementById('profile_image')
     let description = document.getElementById('description')
 
@@ -272,7 +275,6 @@ function register_page_load() {
         form_data.append('first_name', first_name.value);
         form_data.append('last_name', last_name);
         form_data.append('email', mail.value);
-        form_data.append('phone_number', phone.value);
         form_data.append('description', description.value);
         e.preventDefault();
         fetch(api_ip + "auth/register/", {
@@ -293,43 +295,10 @@ function register_page_load() {
             data => {
                 console.log(data);
                 if(data['message']=='success'){ 
-                    fetch(api_ip + "auth/login/", {
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            method:'POST',
-                            body: JSON.stringify({'email': mail.value, 'password': password.value})
-                        }
-                    )
-                    .then(
-                        response => {
-                            return response.json();
-                        }
-                    )
-                    .then (
-                        data => {
-                            if(data.hasOwnProperty('error')){
-                                if (!document.getElementById('error')){
-                                    document.querySelector('.form').insertAdjacentHTML('beforebegin', invalid_data_field)
-                                }
-                            }
-                            else {
-                                setCookie('token', data['success'], {'max-age': 7200})
-                                window.location.href = 'profile.html';
-                            }
-                        }
-                    )
-                    .catch (
-                        error => {console.log('грусть')}
-                    )
-
-
+                    window.location.href = "login.html"
                 }
                 else {
-                    // setCookie('token', data['success'], {'max-age': 7200})
-                    // document.cookie = "token="+data['success'];
-                    // window.location.href = 'profile.html';
+                    document.querySelector('.form').insertAdjacentHTML('beforebegin', invalid_data_field)
                 }
             }
         )
@@ -342,7 +311,6 @@ function register_page_load() {
 
 function check_login() {
     if (get_cookie('token')!=null) {
-        console.log(get_cookie('token'));
         return true;
     }
     else {
@@ -419,5 +387,45 @@ function get_nomination(){
 
 
 function get_profile() {
-
+    const id = new URL(window.location.href).searchParams.get('id');
+    let request_ip = "";
+    let me = false;
+    if (id!=null){
+        request_ip = api_ip + "auth/" + id +"/";
+    }
+    else {
+        if (check_login()) {
+            request_ip = api_ip + "auth/me/";
+            me = true;
+        }
+        else {
+            console.log("Вы не авторизированы")
+        }
+    }
+    fetch(request_ip, {credentials: "include"})
+    .then(
+        response => {
+            return response.json();
+        }
+    )
+    .then( data => {
+        let head = `<h2 class='profile__title'>Профиль: ${data['first_name']} ${data['last_name']}</h2>`
+        if (me) {
+            head = `<h2 class='profile__title'>Мой профиль</h2>`
+        }
+        console.log(data);
+        console.log(document.getElementById("profile"));
+        // <a class='profile__interactive-link' href="">Хочу стать организатором</a>
+        document.getElementById("profile").innerHTML = `
+        ${head}
+        <div class="profile__interactions">
+            <img class='profile__img' src="${data['photo']}" alt="profile picture">
+        </div>
+        <div class="profile__info">
+            <p class="profile__info-title">ФИО: ${data['first_name']} ${data['last_name']}</p>
+            <p class="profile__info-title">Почта: <a href="mailto:${data['email']}">${data['email']}</a></p>
+            <p class="profile__info-title">Обо мне:</p>
+            <p class="profile__info-text">${data['description']}</p>
+        </div>`
+    })
 }

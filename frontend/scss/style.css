@@ -471,7 +471,7 @@ template {
     font-size: 0px;
     grid-area: list;
     background: none;
-    background-image: url(/../img/dots.svg);
+    background-image: url(../img/dots.svg);
     background-repeat: no-repeat;
     background-position: center;
     border: none;
@@ -489,7 +489,7 @@ template {
     font-size: 0px;
     width: 70px;
     background: none;
-    background-image: url(/../img/close.svg);
+    background-image: url(../img/close.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-color: #6499FF;
@@ -1036,7 +1036,7 @@ template {
   margin-bottom: 60px;
 }
 .profile__interactions {
-  height: 704px;
+  height: 512px;
   width: 384px;
   display: flex;
   flex-direction: column;
@@ -1047,6 +1047,7 @@ template {
 .profile__img {
   width: 100%;
   border: solid 2px #000000;
+  height: 100%;
 }
 .profile__button {
   width: 100%;
@@ -1108,8 +1109,9 @@ template {
     height: 51.2px;
   }
   .profile__interactions {
+    margin-top: 30px;
     width: 256px;
-    height: 469.3333333333px;
+    height: 341.3333333333px;
     margin-left: auto;
     margin-right: auto;
   }
