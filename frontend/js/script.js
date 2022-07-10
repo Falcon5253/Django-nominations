@@ -199,7 +199,7 @@ function get_winners() {
             let winner_card =
             `
             <div class='card' id="p${key}">
-                <img class='card__img' src="${api_ip.replace("api/", "")+winner['photo']}" alt="profile picture">
+                <img class='card__img' src="${api_ip.replace("api/", "")+"media/"+winner['photo']}" alt="profile picture">
                 <div class='card__textfield'>
                     <h3 class='card__nickname'>${winner['first_name']} ${winner['last_name']}</h3>
                 </div>
