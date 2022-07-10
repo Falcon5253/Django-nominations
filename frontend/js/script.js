@@ -1,5 +1,5 @@
-const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
-// const api_ip = "http://127.0.0.1:8000/api/"
+// const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -211,7 +211,7 @@ function get_winners() {
             </div>`;
             document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card);
             document.getElementById("p"+key).addEventListener('click', (e) => {
-                window.location.href = 'profile.html?id='+event.currentTarget.id.slice(1);
+                window.location.href = 'profile.html?id='+e.currentTarget.id.slice(1);
             })
         })
 
@@ -453,4 +453,50 @@ function get_profile() {
             <p class="profile__info-text">${data['description']}</p>
         </div>`
     })
+}
+
+
+function get_participants(){
+    fetch(api_ip+"participant/participants/", {method: "POST", body: {'id': (window.location.href).searchParams.get('id')}})
+    .then(
+        response => {
+            return response.json();
+        }
+    )
+    .then(
+        data => {
+            Object.keys(data).forEach( key => {
+                winner = data[key];
+                console.log(winner);
+                let winner_card =
+                `
+                <div class='card' id="p${key}">
+                    <img class='card__img' src="${api_ip.replace("api/", "")+"media/"+winner['photo']}" alt="nomination picture">
+                    <div class='card__textfield'>
+                        <h3 class='card__nickname'>${winner['first_name']} ${winner['last_name']}</h3>
+                    </div>
+                    <div class='card__textfield'>
+                        <p class='card__votes'>Голосов: 0</p>
+                    </div>
+                    <div class='card__textfield'>
+                        <input class='card__button button--green' type="button" value='Проголосовать'>
+                    </div>
+                </div>`
+                // `
+                // <div class='card' id="p${key}">
+                //     <img class='card__img' src="${api_ip.replace("api/", "")+"media/"+winner['photo']}" alt="profile picture">
+                //     <div class='card__textfield'>
+                //         <h3 class='card__nickname'>${winner['first_name']} ${winner['last_name']}</h3>
+                //     </div>
+                //     <div class='card__textfield'>
+                //         <p class='card__nomination'>${winner['nomination_title']} (${winner['year']})</p>
+                //     </div>
+                // </div>`;
+                document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card);
+                document.getElementById("p"+key).addEventListener('click', (e) => {
+                    window.location.href = 'profile.html?id='+e.currentTarget.id.slice(1);
+                });
+            });
+        }
+    )
 }
