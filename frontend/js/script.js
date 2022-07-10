@@ -1,5 +1,5 @@
-// const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
-const api_ip = "http://127.0.0.1:8000/api/"
+const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+//const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -458,8 +458,12 @@ function get_profile() {
 
 function get_participants(){
     const id = new URL(window.location.href).searchParams.get('id')
-    fetch(api_ip+"participant/participants/", {method: "POST", body: {'id': id}})
-    .then(
+    const form_data = new FormData();
+    form_data.append('id',id)
+    fetch(api_ip+"participant/participants/", {method: "POST", body: form_data, headers: {
+                    'Accept': 'application/json',
+                }}
+    ).then(
         response => {
             return response.json();
         }
@@ -493,7 +497,7 @@ function get_participants(){
                 //         <p class='card__nomination'>${winner['nomination_title']} (${winner['year']})</p>
                 //     </div>
                 // </div>`;
-                document.getElementById('last_winners').insertAdjacentHTML('beforeend', winner_card);
+                document.getElementById('participants').insertAdjacentHTML('beforeend', winner_card);
                 document.getElementById("p"+key).addEventListener('click', (e) => {
                     window.location.href = 'profile.html?id='+e.currentTarget.id.slice(1);
                 });
