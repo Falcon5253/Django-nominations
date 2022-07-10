@@ -435,10 +435,16 @@ function get_profile() {
         console.log(data);
         console.log(document.getElementById("profile"));
         // <a class='profile__interactive-link' href="">Хочу стать организатором</a>
+        if (data['photo'].includes("media")){
+            img_link = data['photo']
+        }
+        else {
+            img_link = api_ip.replace("api/", "")+data['photo']
+        }
         document.getElementById("profile").innerHTML = `
         ${head}
         <div class="profile__interactions">
-            <img class='profile__img' src="${api_ip.replace("api/", "")+data['photo']}" alt="profile picture">
+            <img class='profile__img' src="${img_link}" alt="profile picture">
         </div>
         <div class="profile__info">
             <p class="profile__info-title">ФИО: ${data['first_name']} ${data['last_name']}</p>
