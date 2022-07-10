@@ -773,7 +773,15 @@ template {
   height: 100%;
 }
 
+.card--high {
+  height: 512px;
+}
+
 @media (max-width: 650px) {
+  .card--high {
+    height: 341.3333333333px;
+  }
+
   .card {
     margin-bottom: 45px;
     height: 341.3333333333px;

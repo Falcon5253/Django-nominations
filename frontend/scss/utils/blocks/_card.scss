@@ -51,7 +51,13 @@
         height: 100%;
     }
 }
+.card--high {
+    height: $w*8;
+}
 @media (max-width: 650px) {
+    .card--high {
+        height: calc($w*8 / 1.5);
+    }
     .card {
         margin-bottom: 45px;
         height: calc($w * 16 / 3);
