@@ -1,4 +1,4 @@
-const api_ip = "https://justcors.com/tl_4958980/http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
 //const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
