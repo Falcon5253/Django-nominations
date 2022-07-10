@@ -275,7 +275,7 @@ function register_page_load() {
         form_data.append('photo', image.files[0]);
         form_data.append('password', password.value);
         form_data.append('first_name', first_name.value);
-        form_data.append('last_name', last_name);
+        form_data.append('last_name', last_name.value);
         form_data.append('email', mail.value);
         form_data.append('description', description.value);
         e.preventDefault();
