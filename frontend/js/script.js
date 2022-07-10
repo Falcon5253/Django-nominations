@@ -401,7 +401,6 @@ function get_profile() {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'}, 
-            body: JSON.stringify({'token': get_cookie('token')})
         }
     }
     else {
@@ -414,6 +413,7 @@ function get_profile() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'}, 
+                body: JSON.stringify({'token': get_cookie('token')})
             }
         }
         else {
