@@ -58,14 +58,13 @@ class UserViewSet(ModelViewSet):
         return response
 
 
-    @action(methods=['GET'], detail=False, url_path='me')
+    @action(methods=['POST'], detail=False, url_path='me')
     def get_user(self, request):
         con = connect('db.sqlite3')
         data = {'error':'Не авторизованный пользователь'}
-        print(request.COOKIES)
-        if request.COOKIES.get('token'):
+        if 'token' in request.data:
             cursor = con.cursor()
-            query = ('SELECT * FROM `authtoken_token` WHERE `key`="'+str(request.COOKIES.get('token'))+'"')
+            query = ('SELECT * FROM `authtoken_token` WHERE `key`="'+str(request.data['token'])+'"')
             cursor.execute(query)
             for j in cursor:
                 user_id = j[2]

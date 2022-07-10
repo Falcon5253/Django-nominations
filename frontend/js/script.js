@@ -1,5 +1,5 @@
-const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
-//const api_ip = "http://127.0.0.1:8000/api/"
+// const api_ip = "http://django-nominations.std-1867.ist.mospolytech.ru/api/"
+const api_ip = "http://127.0.0.1:8000/api/"
 const invalid_data_field =`<div id='error' class='error'><h2 class='error__title'>Неверные данные, попробуйте еще раз</h2></div>`
 const awaitTimeout = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -392,19 +392,23 @@ function get_profile() {
     const id = new URL(window.location.href).searchParams.get('id');
     let request_ip = "";
     let me = false;
+    let the_method = "GET"
     if (id!=null){
         request_ip = api_ip + "auth/" + id +"/";
     }
     else {
         if (check_login()) {
             request_ip = api_ip + "auth/me/";
+            the_method = "POST"
             me = true;
         }
         else {
             console.log("Вы не авторизированы")
         }
     }
-    fetch(request_ip, {'credentials':'include'})
+    fetch(request_ip, {method: the_method,                 headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'} ,body: JSON.stringify({'token': get_cookie('token')})})
     .then(
         response => {
             return response.json();
