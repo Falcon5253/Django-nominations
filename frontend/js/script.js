@@ -393,22 +393,35 @@ function get_profile() {
     let request_ip = "";
     let me = false;
     let the_method = "GET"
+    let conf = {}
     if (id!=null){
         request_ip = api_ip + "auth/" + id +"/";
+        conf = {
+            method: the_method,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'}, 
+            body: JSON.stringify({'token': get_cookie('token')})
+        }
     }
     else {
         if (check_login()) {
             request_ip = api_ip + "auth/me/";
             the_method = "POST"
             me = true;
+            conf = {
+                method: the_method,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'}, 
+            }
         }
         else {
             console.log("Вы не авторизированы")
         }
     }
-    fetch(request_ip, {method: the_method,                 headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'} ,body: JSON.stringify({'token': get_cookie('token')})})
+
+    fetch(request_ip, conf)
     .then(
         response => {
             return response.json();
