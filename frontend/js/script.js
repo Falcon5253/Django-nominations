@@ -435,7 +435,7 @@ function get_profile() {
         console.log(data);
         console.log(document.getElementById("profile"));
         // <a class='profile__interactive-link' href="">Хочу стать организатором</a>
-        if (data['photo'].includes("media")){
+        if (data['photo'].includes("django")){
             img_link = data['photo']
         }
         else {
