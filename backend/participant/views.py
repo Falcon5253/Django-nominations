@@ -15,7 +15,7 @@ class ParticipantViewSet(ModelViewSet):
 
     @action(methods=['POST'], detail=False, url_path='participants')
     def get_participants(self, request):
-        participants = Participant.objects.get(competition_id= request.data['id'])
+        participants = Participant.objects.filter(competition_id= request.data['id'])
         users = []
         for participant in json.loads(serializers.serialize('json', [participants])):
             users.append(User.objects.get(id = participant['fields']['user_id']))
