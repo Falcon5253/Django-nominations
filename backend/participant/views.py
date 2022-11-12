@@ -1,4 +1,3 @@
-import re
 from rest_framework.viewsets import ModelViewSet
 from participant.serializers import ParticipantSerializer
 from participant.models import Participant

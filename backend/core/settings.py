@@ -55,12 +55,11 @@ INSTALLED_APPS = [
 
     #Custom Apps
     'authentication',
-    'nominations',
-    'organizer',
+    'nomination',
     'participant',
-    'votes',
+    'vote',
     'competition',
-    'winners',
+    'comp_winner',
 
 ]
 
