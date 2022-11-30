@@ -122,8 +122,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': env('HOST'),
-        'NAME': env('NAME'),
-        'USER': env('USER'),
+        'NAME': env('DBNAME'),
+        'USER': env('USERNAME'),
         'PORT': env('PORT'),
         'PASSWORD': env('PASSWORD')
     }
