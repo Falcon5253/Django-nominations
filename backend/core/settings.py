@@ -118,8 +118,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-print("фФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФФ")
-print(env('HOST'), env('DB_NAME'),env('USER_NAME'),env('PORT'), env('PASSWORD'))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
