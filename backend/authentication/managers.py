@@ -2,14 +2,11 @@ from django.contrib.auth.models import BaseUserManager
 from rest_framework.authtoken.models import Token
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name, last_name, password=None):
+    def create_user(self, email, nickname, password=None):
         user = self.model(
             email = self.normalize_email(email),
-            first_name = first_name,
-            last_name = last_name,
+            nickname = nickname
         )
-
-
 
         user.set_password(password)
         user.save()
@@ -17,16 +14,16 @@ class UserManager(BaseUserManager):
         
         return user
 
-    def create_superuser(self, email, first_name, last_name, password):
+    def create_superuser(self, email, nickname, password):
         user = self.create_user(
             email = self.normalize_email(email),
-            first_name = first_name,
-            last_name = last_name,
+            nickname = nickname,
             password = password,
         )
 
         user.is_active = True
         user.is_staff = True
+        user.is_organizer = True
         user.is_superuser = True
         user.save()
         
