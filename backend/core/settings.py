@@ -55,12 +55,7 @@ INSTALLED_APPS = [
 
     #Custom Apps
     'authentication',
-    'nomination',
-    'participant',
-    'vote',
     'competition',
-    'comp_winner',
-
 ]
 
 REST_FRAMEKWORK = {
@@ -120,7 +115,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': env('ENGINE'),
         'HOST': env('HOST'),
         'NAME': env('DB_NAME'),
         'USER': env('USER_NAME'),
