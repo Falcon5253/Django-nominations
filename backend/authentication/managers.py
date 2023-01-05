@@ -5,12 +5,10 @@ class UserManager(BaseUserManager):
     def create_user(self, email, nickname, password=None):
         user = self.model(
             email = self.normalize_email(email),
-            nickname = nickname
-        )
+            nickname = nickname)
 
         user.set_password(password)
         user.save()
-        Token.objects.create(user=user)
         
         return user
 

@@ -48,9 +48,9 @@ INSTALLED_APPS = [
 
     #3d party
     'rest_framework',
-    'rest_framework_simplejwt',
-    'rest_framework.authtoken',
-    'corsheaders',
+    # 'rest_framework_simplejwt',
+    # 'rest_framework.authtoken',
+    # 'corsheaders',
 
 
     #Custom Apps
@@ -63,7 +63,7 @@ REST_FRAMEKWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        '',
     )
 }
 

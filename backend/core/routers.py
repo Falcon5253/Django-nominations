@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 from competition.views import CompetitionViewSet, NominationViewSet, WinnerViewSet, ParticipantViewSet, VoteViewSet
-from authentication.views import UserViewSet
+from authentication.views import register
 
 router = DefaultRouter()
 
@@ -9,4 +9,4 @@ router.register('competition', CompetitionViewSet)
 router.register('participant', ParticipantViewSet)
 router.register('vote', VoteViewSet)
 router.register('winner', WinnerViewSet)
-router.register('auth', UserViewSet)
+# router.register('auth', register)

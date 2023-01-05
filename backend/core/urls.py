@@ -17,10 +17,12 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
 from core.routers import router
+from authentication.views import register
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/register/', register, name="register route")
 ]
