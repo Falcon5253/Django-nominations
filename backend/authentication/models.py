@@ -10,7 +10,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     description = models.TextField(verbose_name='Описание')
 
     is_active = models.BooleanField(verbose_name='активирован', default=True)
-    is_organizer = models.BooleanField(verbose_name='сотрудник', default=False)
+    is_organizer = models.BooleanField(verbose_name='организатор', default=False)
     is_staff = models.BooleanField(verbose_name='сотрудник', default=False)
     is_superuser = models.BooleanField(verbose_name='администратор', default=False)
 
