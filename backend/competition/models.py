@@ -58,7 +58,7 @@ class Winner(models.Model):
     participant_id = models.OneToOneField(to=Participant, on_delete=models.CASCADE, verbose_name='participant')
 
     def __str__(self):
-        return str(self.competititon_id)
+        return str(self.participant_id)
     
     class Meta:
         verbose_name = 'Победитель'
@@ -66,11 +66,11 @@ class Winner(models.Model):
 
 
 class Vote(models.Model):
-    user_id = models.OneToOneField(to=User, verbose_name='user', on_delete=models.CASCADE)
-    voted_for = models.OneToOneField(to=Participant, verbose_name='voted_for', on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, verbose_name='user', on_delete=models.CASCADE)
+    voted_for = models.ForeignKey(to=Participant, verbose_name='voted_for', on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.competition_id)
+        return str(self.user) + " за " + str(self.voted_for)
     
     class Meta:
         verbose_name = 'Голос'

@@ -33,6 +33,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://*.localhost:8080']
 
 
 # Application definition
