@@ -5,11 +5,12 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.utils import formatting
 from authentication.models import User
+from rest_framework.views import APIView
 from authentication.serializers import UserSerializer
 # from rest_framework.permissions import IsAuthenticated
 
 
-class ProfileViewSet(GenericViewSet):
+class ProfileViewSet(GenericViewSet, APIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
