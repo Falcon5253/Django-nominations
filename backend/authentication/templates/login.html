@@ -1,47 +1,41 @@
 {% extends "api.html" %}
-{% load rest_framework %}
-
+{% load static %}
+{% load rest_framework   %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static "my_statics/css/style.css" %}"/>
+{% endblock %}
+{% block title %}
+Login - Nominations Api
+{% endblock %}
 {% block body %}
-<body class="container">
-  <div class="container-fluid" style="margin-top: 30px">
-    <div class="row-fluid">
-        <div class="row-fluid">
-          <div>
-            {% block branding %}<h3 style="margin: 0 0 20px;">Django REST framework</h3>{% endblock %}
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          <div>
-            <form class='form' action="{% url 'rest_framework:login' %}" role="form" method="post">
-                <div class='form__labels'>
-                    <label class='form__label' for="email">Почта</label>
-                    <label class='form__label' for="password">Пароль</label>
-                </div>
-                <input class='form__input' id='email' type="text" name="email" required>
-                {% if form.username.errors %}
-                  <p class="text-error">
-                    {{ form.username.errors|striptags }}
-                  </p>
-                {% endif %}
-                <input class='form__input' id='password' type="text" name="password" required>
-                {% if form.password.errors %}
-                  <p class="text-error">
-                    {{ form.password.errors|striptags }}
-                  </p>
-                {% endif %}
-                <input class='form__input button' type="submit" value='Войти'>
-                <a class='form__input form__input--reg-button button' href="register.html">Зарегистрироваться</a>
-                {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                  <div class="well well-small text-error" style="border: none">{{ error }}</div>
-                {% endfor %}
-              {% endif %}
-              {% csrf_token %}
-            </form>
-          </div>
-        </div><!-- /.row-fluid -->
-    </div><!-- /.row-fluid -->
-  </div><!-- /.container-fluid -->
+<body>
+  
 </body>
+<form class='form' action="{% url 'rest_framework:login' %}" role="form" method="post">
+  {% csrf_token %}
+    <div class='form__labels'>
+        <label class='form__label' for="email">Почта</label>
+        <label class='form__label' for="password">Пароль</label>
+    </div>
+    <input class='form__input' id='email' type="text" autocomplete='username' name="username" required>
+    {% if form.username.errors %}
+      <p>
+        {{ form.username.errors|striptags }}
+      </p>
+    {% endif %}
+    <input class='form__input' id='password' type="password" name="password" autocomplete='current-password' required>
+    {% if form.password.errors %}
+      <p>
+        {{ form.password.errors|striptags }}
+      </p>
+    {% endif %}
+    <input class='form__input button' type="submit" id='submit' value='Войти'>
+    <!-- <a class='form__input form__input--reg-button button' href="register.html">Зарегистрироваться</a> -->
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <div style="border: none">{{ error }}</div>
+    {% endfor %}
+  {% endif %}
+
+</form>
 {% endblock %}

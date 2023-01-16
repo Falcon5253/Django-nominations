@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="{% static "my_statics/css/style.css" %}"/>
     {% block head %}
 
       {% block meta %}
@@ -13,7 +12,7 @@
         <meta name="robots" content="NONE,NOARCHIVE" />
       {% endblock %}
 
-      <title>{% block title %}{% if name %}{{ name }} – {% endif %} AAAAAAAAAAAAAA {% endblock %}</title>
+      <title>{% block title %}{% if name %}{{ name }} – {% endif %} Nominations Api {% endblock %}</title>
 
       {% block style %}
         {% block bootstrap_theme %}

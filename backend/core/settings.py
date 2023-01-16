@@ -70,10 +70,6 @@ REST_FRAMEKWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         '',
     ),
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'core.renderer',
-    ],
 }
 
 api_settings.DEFAULT_RENDERER_CLASSES = [
@@ -88,7 +84,9 @@ SIMPLE_JWT = {
 
 
 CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
+
+LOGIN_REDIRECT_URL = '/api/auth/'
 
 
 MIDDLEWARE = [
@@ -186,5 +184,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    '/var/www/practice/static/',
 )
