@@ -1,47 +1,88 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from .models import Participant
-from .serializers import CompetitionSerializer, WinnerSerialzer, NominationSerializer, ParticipantSerializer, VoteSerializer
+from .serializers import (
+    CompetitionSerializer, 
+    WinnerSerialzer, 
+    NominationSerializer,
+    ParticipantSerializer,
+    VoteSerializer,
+    CompetitionAdminSerializer,
+    CompetitionOrganizerSerializer
+)
 from .models import Competition, Winner, Nomination, Vote
 from authentication.models import User
 from django.core import serializers
+from authentication.permissions import IsOrganizer, IsAdminUser
 import json
 
 class CompetitionViewSet(ModelViewSet):
     queryset = Competition.objects.all()
     serializer_class = CompetitionSerializer
+    
+    
+    
     def get_permissions(self):
-        """
-        Instantiates and returns the list of permissions that this view requires.
-        """
         if self.action == 'list':
             permission_classes = [IsAuthenticated]
-        else:
+        elif self.action == 'admin_details' or self.action == 'admin_view':
             permission_classes = [IsAdminUser]
-        return [permission() for permission in permission_classes]
-    
-    def get_permissions(self):
-        if self.action == 'list':
-            permission_classes = [IsAuthenticated]
-        elif self.action == 'organizer_view':
-            permission_classes = [IsOrganizer]
         else:
-            permission_classes = IsAdminUser
+            permission_classes = [IsOrganizer]
         return [permission() for permission in permission_classes]
     
+    
+    
+    # ADMIN
     @action(detail=False, methods=['get'], url_path='admin_view', name='Administrator view')
     def admin_view(self, request):
-        serializer = self.get_serializer(Competition.objects.all(), many=True)
+        all_comps = Competition.objects.all()
+        serializer = CompetitionAdminSerializer(all_comps, many=True)
         self.serializer_class.Meta.fields = '__all__'
+        
         return Response(serializer.data)
     
-    @action(detail=False, methods=['get'], url_path='organizer_view', name='Organazer view')
+    
+    
+    # ORGANIZER
+    @action(detail=False, methods=['get'], url_path='organizer_view', name='Organizer view')
     def organizer_view(self, request):
-        serializer = self.get_serializer(Competition.objects.all(), many=True)
-        self.serializer_class.Meta.fields = '__all__'
+        comps = Competition.objects.filter(organizer_id=request.user.id)
+        serializer = CompetitionOrganizerSerializer(comps, many=True)
+        
         return Response(serializer.data)
+    
+    
+    
+    # ADMIN DETAILS
+    @action(detail=True, methods=['get'], url_path='admin_details', name='More admin details')
+    def admin_details(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = CompetitionAdminSerializer(instance)
+        return Response(serializer.data)
+    
+    
+    
+    # Страница объекта
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.serializer_class = CompetitionOrganizerSerializer
+        serializer = CompetitionOrganizerSerializer(instance)
+        return Response(serializer.data)
+    
+    
+    # Создание объекта
+    def create(self, request, *args, **kwargs):
+        self.serializer_class = CompetitionOrganizerSerializer
+        serializer = self.get_serializer(data=request.data)
+        print(1111)
+        serializer.is_valid(raise_exception=True)
+        print(222)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, headers=headers)
 
 
 class WinnerViewSet(ModelViewSet):

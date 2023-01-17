@@ -77,7 +77,6 @@ api_settings.DEFAULT_RENDERER_CLASSES = [
     myApiRenderer,
 ]
 
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
 }
@@ -101,7 +100,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 #CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [

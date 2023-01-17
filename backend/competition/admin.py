@@ -28,5 +28,5 @@ class CompetitionForm(forms.ModelForm):
 
 @admin.register(Competition, site=my_admin_site)
 class CompetitionAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'description', 'concluded_at')
+    list_display = ('id', '__str__', 'description', 'concluded_at')
     form = CompetitionForm

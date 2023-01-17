@@ -36,6 +36,7 @@ class listOfUrlsView(APIRootView):
 
 class myRouter(DefaultRouter):
     APIRootView = listOfUrlsView
+    root_view_name = "list-of-urls"
 
 router = myRouter()
 
