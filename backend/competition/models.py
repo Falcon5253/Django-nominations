@@ -4,7 +4,7 @@ from authentication.models import User
 
 
 class Nomination(models.Model):
-    title = models.CharField(verbose_name='Название', max_length=255)
+    title = models.CharField(verbose_name='Название', max_length=255, unique=True)
     description = models.TextField(verbose_name='Описание')
     
     def __str__(self):

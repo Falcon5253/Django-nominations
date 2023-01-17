@@ -1,11 +1,31 @@
 from rest_framework import serializers
 from .models import Competition, Winner, Nomination, Participant, Vote
+from rest_framework.fields import empty
 
 class CompetitionSerializer(serializers.ModelSerializer):
     nomination = serializers.CharField(source='nomination.title')
+    
+    def __init__(self, instance=None, data=empty, **kwargs):
+        self.Meta.fields = ['nomination', 'description', 'concluded_at']
+        super(CompetitionSerializer, self).__init__(instance=None, data=data, **kwargs)
+    
+    def create(self, validated_data):
+        nomination = validated_data['nomination']
+        title = nomination['title']
+        validated_data["nomination"] = Nomination.objects.get(title=title)
+        return super(CompetitionSerializer, self).create(validated_data)
+    
+    def update(self, instance, validated_data):
+        nomination = validated_data['nomination']
+        title = nomination['title']
+        validated_data["nomination"] = Nomination.objects.get(title=title)
+        return super(CompetitionSerializer, self).create(validated_data)
+    
+    
     class Meta:
         model = Competition
-        fields = '__all__'
+        fields = ['nomination', 'description', 'concluded_at']
+        
 
 
 class WinnerSerialzer(serializers.ModelSerializer):

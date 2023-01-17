@@ -1,14 +1,15 @@
 from django import forms
 from django.contrib import admin
+from core.admin import my_admin_site
 
 from competition.models import Competition, Winner, Nomination, Participant, Vote
 from authentication.models import User
 
 
-admin.site.register(Winner)
-admin.site.register(Nomination)
-admin.site.register(Participant)
-admin.site.register(Vote)
+my_admin_site.register(Winner)
+my_admin_site.register(Nomination)
+my_admin_site.register(Participant)
+my_admin_site.register(Vote)
 
 
 class CompetitionForm(forms.ModelForm):
@@ -25,7 +26,7 @@ class CompetitionForm(forms.ModelForm):
     cover = forms.ImageField(label='Обложка')
 
 
-@admin.register(Competition)
+@admin.register(Competition, site=my_admin_site)
 class CompetitionAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'description', 'concluded_at')
     form = CompetitionForm

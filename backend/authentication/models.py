@@ -11,14 +11,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     is_active = models.BooleanField(verbose_name='активирован', default=True)
     is_organizer = models.BooleanField(verbose_name='организатор', default=False)
-    is_staff = models.BooleanField(verbose_name='сотрудник', default=False)
+    is_staff = None
     is_superuser = models.BooleanField(verbose_name='администратор', default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
 
 
-
+        
     objects = UserManager() 
  
     def __str__(self):

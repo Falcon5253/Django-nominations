@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Participant
 from .serializers import CompetitionSerializer, WinnerSerialzer, NominationSerializer, ParticipantSerializer, VoteSerializer
 from .models import Competition, Winner, Nomination, Vote
@@ -11,6 +12,36 @@ import json
 class CompetitionViewSet(ModelViewSet):
     queryset = Competition.objects.all()
     serializer_class = CompetitionSerializer
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action == 'list':
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+    
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [IsAuthenticated]
+        elif self.action == 'organizer_view':
+            permission_classes = [IsOrganizer]
+        else:
+            permission_classes = IsAdminUser
+        return [permission() for permission in permission_classes]
+    
+    @action(detail=False, methods=['get'], url_path='admin_view', name='Administrator view')
+    def admin_view(self, request):
+        serializer = self.get_serializer(Competition.objects.all(), many=True)
+        self.serializer_class.Meta.fields = '__all__'
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'], url_path='organizer_view', name='Organazer view')
+    def organizer_view(self, request):
+        serializer = self.get_serializer(Competition.objects.all(), many=True)
+        self.serializer_class.Meta.fields = '__all__'
+        return Response(serializer.data)
 
 
 class WinnerViewSet(ModelViewSet):
