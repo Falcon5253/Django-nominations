@@ -13,6 +13,12 @@ class IsOrganizer(BasePermission):
     def has_object_permission(self, request, view, obj):
         return request.user.id == obj.organizer.id
     
+
+class IsNotAuthenticated(BasePermission):
+    message = 'Вы уже авторизованы'
+    def has_permission(self, request, view):
+        return not bool(request.user and request.user.is_authenticated)
+
 class IsAdminUser(BasePermission):
     message = 'Не админ'
     def has_permission(self, request, view):

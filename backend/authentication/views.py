@@ -6,6 +6,7 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework.utils import formatting
 from authentication.models import User
 from rest_framework.views import APIView
+from authentication.permissions import IsNotAuthenticated
 from authentication.serializers import UserSerializer
 
 
@@ -14,13 +15,6 @@ class ProfileViewSet(GenericViewSet, APIView):
     serializer_class = UserSerializer
 
     def get_view_name(self):
-        """
-        Given a view instance, return a textual name to represent the view.
-        This name is used in the browsable API, and in OPTIONS responses.
-
-        This function is the default for the `VIEW_NAME_FUNCTION` setting.
-        """
-        # Name may be set by some Views, such as a ViewSet.
         name = getattr(self, 'name', None)
         if name is not None:
             return name
@@ -40,7 +34,7 @@ class ProfileViewSet(GenericViewSet, APIView):
         data = { 'Warning':'You are not authorized' }
         return Response(data)
     
-    @action(methods=['POST'], detail=False, url_path='register')
+    @action(methods=['POST'], detail=False, url_path='register', permission_classes=[IsNotAuthenticated])
     def register(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)

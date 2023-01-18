@@ -17,5 +17,16 @@ class UserSerializer(serializers.ModelSerializer):
         if password is not None:
             instance.set_password(password)
         instance.save()
-
         return instance
+
+    
+    def validate_password(self, value):
+        for i in range(len(value)-2):
+            search_value = value[i:i+3]
+            if self.initial_data['email'].find(search_value) != -1:
+                raise serializers.ValidationError("Passwrod is too similar to your email. Please try another one.")
+        
+        if len(value) < 8:
+            raise serializers.ValidationError("Passwrod has to be not shorter than 8 characters")
+        
+        return value

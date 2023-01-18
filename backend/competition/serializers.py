@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Competition, Winner, Nomination, Participant, Vote
 from rest_framework.fields import empty
 from django.utils import timezone
-from authentication.models import User
+
 
 
 class CompetitionSerializer(serializers.ModelSerializer):
@@ -28,10 +28,9 @@ class CompetitionAdminSerializer(CompetitionSerializer):
 # TODO: Добавить ссылку на детальную страницу
 class CompetitionOrganizerSerializer(CompetitionSerializer):
     organizer_email = serializers.EmailField(read_only=True, source='organizer.email')
-
+    
     def update(self, instance, validated_data):
         validated_data['created_at'] = timezone.now().date()
-        print(validated_data)
         return super().update(instance, validated_data)
     
     class Meta:

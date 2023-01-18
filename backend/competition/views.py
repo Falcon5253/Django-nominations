@@ -17,20 +17,21 @@ from authentication.models import User
 from django.core import serializers
 from authentication.permissions import IsOrganizer, IsAdminUser
 import json
+from competition.pagination import MyPagination
 
 class CompetitionViewSet(ModelViewSet):
     queryset = Competition.objects.all()
     serializer_class = CompetitionSerializer
-    
-    
+    pagination_class = MyPagination
+
     
     def get_permissions(self):
         if self.action == 'list':
             permission_classes = [IsAuthenticated]
         elif self.action == 'admin_details' or self.action == 'admin_view':
-            permission_classes = [IsAdminUser]
+            permission_classes = [IsAuthenticated, IsAdminUser]
         else:
-            permission_classes = [IsOrganizer]
+            permission_classes = [IsAuthenticated, IsOrganizer]
         return [permission() for permission in permission_classes]
     
     
@@ -39,18 +40,19 @@ class CompetitionViewSet(ModelViewSet):
     @action(detail=False, methods=['get'], url_path='admin_view', name='Administrator view')
     def admin_view(self, request):
         all_comps = Competition.objects.all()
-        serializer = CompetitionAdminSerializer(all_comps, many=True)
-        self.serializer_class.Meta.fields = '__all__'
-        
-        return Response(serializer.data)
-    
+        page = self.paginate_queryset(all_comps)
+        if page is not None:
+            serializer = CompetitionAdminSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+           
     
     
     # ORGANIZER
     @action(detail=False, methods=['get'], url_path='organizer_view', name='Organizer view')
     def organizer_view(self, request):
         comps = Competition.objects.filter(organizer_id=request.user.id)
-        serializer = CompetitionOrganizerSerializer(comps, many=True)
+        page = self.paginate_queryset(comps)
+        serializer = CompetitionOrganizerSerializer(page, many=True)
         
         return Response(serializer.data)
     
@@ -77,9 +79,7 @@ class CompetitionViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         self.serializer_class = CompetitionOrganizerSerializer
         serializer = self.get_serializer(data=request.data)
-        print(1111)
         serializer.is_valid(raise_exception=True)
-        print(222)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, headers=headers)

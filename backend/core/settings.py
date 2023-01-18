@@ -17,6 +17,7 @@ import environ
 from rest_framework.settings import api_settings
 from core.renderer import myApiRenderer
 from rest_framework import renderers as restRenderers
+from rest_framework import pagination
 
 
 
@@ -76,6 +77,9 @@ api_settings.DEFAULT_RENDERER_CLASSES = [
     restRenderers.JSONRenderer,
     myApiRenderer,
 ]
+api_settings.DEFAULT_PAGINATION_CLASS = pagination.LimitOffsetPagination
+api_settings.PAGE_SIZE = 1
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
