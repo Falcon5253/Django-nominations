@@ -33,8 +33,7 @@ class CompetitionViewSet(ModelViewSet):
         else:
             permission_classes = [IsAuthenticated, IsOrganizer]
         return [permission() for permission in permission_classes]
-    
-    
+
     
     # ADMIN
     @action(detail=False, methods=['get'], url_path='admin_view', name='Administrator view')
@@ -45,7 +44,6 @@ class CompetitionViewSet(ModelViewSet):
             serializer = CompetitionAdminSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)
            
-    
     
     # ORGANIZER
     @action(detail=False, methods=['get'], url_path='organizer_view', name='Organizer view')

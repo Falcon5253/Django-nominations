@@ -26,7 +26,7 @@ class IsAdminUser(BasePermission):
     def has_object_permission(self, request, view, obj):
         return bool(request.user and request.user.is_superuser)
     
-try:        
+try:
     content_type = ContentType.objects.get_for_model(Competition)
     comp_permission = Permission.objects.filter(content_type=content_type)
 

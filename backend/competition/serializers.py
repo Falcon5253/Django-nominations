@@ -32,6 +32,12 @@ class CompetitionOrganizerSerializer(CompetitionSerializer):
     def update(self, instance, validated_data):
         validated_data['created_at'] = timezone.now().date()
         return super().update(instance, validated_data)
+        
+    def validate_organizer(self, value):
+        if not value.is_organizer:
+            raise serializers.ValidationError("Данный пользователь не является орагнизатором")
+        
+        return value
     
     class Meta:
         model = Competition

@@ -1,7 +1,13 @@
 from django.db import models
 import django
 from authentication.models import User
+from simple_history.models import HistoricalRecords
+from celery import shared_task
+from django.db.models import Q
 
+@shared_task
+def myCeleryTask():
+    print(1111)
 
 class Nomination(models.Model):
     title = models.CharField(verbose_name='Название', max_length=255, unique=True)
@@ -23,11 +29,13 @@ class Competition(models.Model):
     description = models.TextField(verbose_name='Описание', null=True, default=None)
     organizer = models.ForeignKey(to=User, verbose_name='organizer', related_name='competition', on_delete=models.CASCADE)
     cover = models.ImageField(verbose_name='Обложка', upload_to='competition/cover')
-
+    history = HistoricalRecords()
+    
     def __str__(self):
         return str(self.nomination.title) + ' (' + str(self.created_at) + ')'
 
     def save(self, *args, **kwargs):
+        myCeleryTask()
         if self.description == "":
             self.description = self.nomination.description
         

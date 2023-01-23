@@ -20,7 +20,6 @@ from rest_framework import renderers as restRenderers
 from rest_framework import pagination
 
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -50,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    
 
 
     #3d party
@@ -72,6 +73,9 @@ REST_FRAMEKWORK = {
         '',
     ),
 }
+
+
+CELERY_RESULT_BACKEND = 'django-db'
 
 api_settings.DEFAULT_RENDERER_CLASSES = [
     restRenderers.JSONRenderer,
